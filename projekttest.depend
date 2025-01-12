@@ -1768,7 +1768,7 @@
 1736177435 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\univ\theme.h
 	"wx/string.h"
 
-1736689049 c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.h
+1736704139 c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.h
 	"MultiPlayerUI.h"
 	"SoloPlayerUI.h"
 	"Game.h"
@@ -2066,9 +2066,10 @@
 1736177434 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\qt\tglbtn.h
 	"wx/tglbtn.h"
 
-1736693132 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
+1736704130 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
 	"projekttestMain.h"
 	<wx/msgdlg.h>
+	<wx/wx.h>
 	<wx/intl.h>
 	<wx/string.h>
 
@@ -2111,13 +2112,13 @@
 
 1736177431 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\msw\rcdefs.h
 
-1736701278 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
+1736724762 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
 	"SoloPlayerUI.h"
 	<wx/wx.h>
 	<wx/intl.h>
 	<wx/string.h>
 
-1736702407 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
+1736722309 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
 	"Game.h"
 	<wx/dialog.h>
 	<wx/sizer.h>
@@ -2134,18 +2135,18 @@
 	<string>
 	<vector>
 
-1736691072 c:\users\ozogm\documents\cpp\projects\projekttest\player.h
+1736724737 c:\users\ozogm\documents\cpp\projects\projekttest\player.h
 	"Attempt.h"
 	<string>
 
-1736691781 c:\users\ozogm\documents\cpp\projects\projekttest\attempt.h
+1736725097 c:\users\ozogm\documents\cpp\projects\projekttest\attempt.h
 	<string>
 	<vector>
 
-1736691230 source:c:\users\ozogm\documents\cpp\projects\projekttest\attempt.cpp
+1736725068 source:c:\users\ozogm\documents\cpp\projects\projekttest\attempt.cpp
 	"Attempt.h"
 
-1736691087 source:c:\users\ozogm\documents\cpp\projects\projekttest\player.cpp
+1736724733 source:c:\users\ozogm\documents\cpp\projects\projekttest\player.cpp
 	"Player.h"
 
 1736691398 source:c:\users\ozogm\documents\cpp\projects\projekttest\level.cpp

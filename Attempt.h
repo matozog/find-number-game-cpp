@@ -6,13 +6,13 @@
 
 class Attempt {
 private:
-    std::vector<int> digits;
+    std::vector<std::string> digits;
     std::string* solution;
 
 public:
-    Attempt(std::vector<int> digits);
-    std::vector<int> getDigits();
-    virtual ~Attempt();
+    Attempt(const std::vector<std::string>& digits);
+    const std::vector<std::string>& getDigits() const;
+    ~Attempt();
 };
 
 #endif // ATTEMPT_H_INCLUDED

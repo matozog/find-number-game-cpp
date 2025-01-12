@@ -9,6 +9,7 @@
 
 #include "projekttestMain.h"
 #include <wx/msgdlg.h>
+#include <wx/wx.h>
 
 //(*InternalHeaders(projekttestDialog)
 #include <wx/intl.h>
@@ -155,7 +156,7 @@ void projekttestDialog::OnMultiPlayerCheck(wxCommandEvent& event){
 }
 
 void projekttestDialog::createGame() {
-    Level* level = new Level(LevelChoice->GetStringSelection().ToStdString());
+    Level* level = new Level(LevelChoice->GetStringSelection().ToUTF8().data());
     std::string gameType = SinglePlayerCheckbox->IsChecked() ? "single" : "multi";
     Player* player1 = new Player(Player1TextField->GetValue().ToStdString());
     if(gameType == "single") {

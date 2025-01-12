@@ -45,7 +45,6 @@ class projekttestDialog: public wxDialog
         void OnPlayButtonClick(wxCommandEvent& event);
         void OnSinglePlayerCheck(wxCommandEvent& event);
         void OnMultiPlayerCheck(wxCommandEvent& event);
-        void OnLevelChoiceChange(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(projekttestDialog)

@@ -24,7 +24,11 @@ class SoloPlayerUI: public wxDialog
 		virtual ~SoloPlayerUI();
 
         wxGridSizer* GameBoard;
+        wxGridSizer* PlayerAttemptsGridBox;
+        wxGridSizer* CurrentAttemptGridBox;
         wxFlexGridSizer* SinglePlayerContentFlexbox;
+
+        void OnAcceptAttemptClick(wxCommandEvent& evt);
 
 		//(*Declarations(SoloPlayerUI)
 		wxStaticText* StaticText2;
@@ -58,6 +62,7 @@ class SoloPlayerUI: public wxDialog
 
 	private:
         Game* game;
+        std::vector<wxTextCtrl*> currentAttemptCtrls;
 		//(*Handlers(SoloPlayerUI)
 		//*)
 

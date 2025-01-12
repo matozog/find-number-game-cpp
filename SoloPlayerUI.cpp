@@ -47,7 +47,7 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 	TextCtrl3 = new wxTextCtrl(this, ID_TEXTCTRL3, _("Text"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL3"));
 	GridSizer1->Add(TextCtrl3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	SinglePlayerContentFlexbox->Add(GridSizer1, 1, wxALL|wxEXPAND, 5);
-    GameBoard = new wxGridSizer(1, 3, 0, 0);
+    GameBoard = new wxGridSizer(2, 2, 0, 0);
 	SinglePlayerContentFlexbox->Add(GameBoard, 1, wxALL|wxEXPAND, 5);
 	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
 	StaticText5 = new wxStaticText(this, ID_STATICTEXT5, _("Czas:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
@@ -64,42 +64,85 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 	SinglePlayerContentFlexbox->Fit(this);
 	SinglePlayerContentFlexbox->SetSizeHints(this);
 	//*)
+    PlayerAttemptsGridBox = new wxGridSizer(0, 0, 0, 0);
+    GameBoard->Add(PlayerAttemptsGridBox, 1, wxALL|wxEXPAND, 5);
+    GameBoard->AddSpacer(0);
+    CurrentAttemptGridBox = new wxGridSizer(1, 0, 0, 0);
+    GameBoard->Add(CurrentAttemptGridBox, 1, wxALL|wxEXPAND, 5);
+    wxButton* AcceptAttemptButton = new wxButton(this, wxNewId(), _("Zatwierdź"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_SINGLE_PLAYER_ACCEPT_ATTEMPT_BUTTON"));
+    GameBoard->Add(AcceptAttemptButton, 0, wxALL, 5);
+    GameBoard->Layout();
+    SinglePlayerContentFlexbox->Fit(this);
+
+    AcceptAttemptButton->Bind(wxEVT_BUTTON, &SoloPlayerUI::OnAcceptAttemptClick, this);
 }
 
 void SoloPlayerUI::createGameBoard(Game* game){
     this->game = game;
     //wxMessageBox(std::to_string(this->game->getLevel()->getAmountOfDigits() + 2), "Message Box", wxOK | wxICON_INFORMATION);
-    GameBoard->Clear(true);
-    GameBoard->Layout();
-    GameBoard->SetCols(this->game->getLevel()->getAmountOfDigits()+ 2);
     this->generateAttempts();
     this->generateCurrentAttempt();
+    GameBoard->Layout();
 }
 
 void SoloPlayerUI::generateAttempts() {
     Player* player1 = game->getPlayer1();
-    for(int i = 0; i < player1->getAttempts().size(); i++){
-        for(int j=0; j<player1->getAttempts().at(i).getDigits().size(); j++){
-            wxTextCtrl* attemptCell = new wxTextCtrl(this, wxNewId(), _(""), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_SINGLE_PLAYER_ATTEMPT_" + j));
-            GameBoard->Add(attemptCell, 1, wxALL, 5);
+    int amountOfAttempts = player1->getAttempts().size();
+
+    if(amountOfAttempts == 0) return;
+
+    PlayerAttemptsGridBox->Clear(true);
+    PlayerAttemptsGridBox->SetRows(amountOfAttempts);
+    PlayerAttemptsGridBox->SetCols(player1->getAttempts().at(0).getDigits().size());
+
+    //wxMessageBox(std::to_string(2), "Message Box", wxOK | wxICON_INFORMATION);
+
+     for(Attempt& attempt: player1->getAttempts()){
+        for(int j=0; j<attempt.getDigits().size(); j++){
+            wxString id = wxString::Format("ID_SINGLE_PLAYER_ATTEMPT_%d", j);
+            wxTextCtrl* attemptCell = new wxTextCtrl(this, wxNewId(), _(attempt.getDigits().at(j)), wxDefaultPosition, wxSize(40, 30), wxTE_READONLY, wxDefaultValidator, id);
+            PlayerAttemptsGridBox->Add(attemptCell, 1, wxALL, 5);
         }
     }
+    PlayerAttemptsGridBox->Layout();
 }
 
 void SoloPlayerUI::generateCurrentAttempt() {
+    wxMessageBox("Generate current attempt", "Message Box", wxOK | wxICON_INFORMATION);
     Level* level = game->getLevel();
+    CurrentAttemptGridBox->Clear(true);
+    CurrentAttemptGridBox->SetCols(level->getAmountOfDigits());
+    currentAttemptCtrls.clear();
     for(int i=0; i<level->getAmountOfDigits(); i++){
         std::string cellId = "ID_SINGLE_PLAYER_CURRENT_ATTEMPT_" + i;
-        wxTextCtrl* currentAttemptCell = new wxTextCtrl(this, wxNewId(), _(std::to_string(i)), wxDefaultPosition, wxSize(40, 30), wxTE_READONLY, wxDefaultValidator, cellId);
-        GameBoard->Add(currentAttemptCell, 1, wxALL, 5);
+        wxTextCtrl* currentAttemptCell = new wxTextCtrl(this, wxNewId(), _(std::to_string(i + 1)), wxDefaultPosition, wxSize(40, 30), wxTE_READONLY, wxDefaultValidator, cellId);
+        currentAttemptCtrls.push_back(currentAttemptCell);
+        CurrentAttemptGridBox->Add(currentAttemptCell, 1, wxALL, 5);
     }
-    wxButton* AcceptAttemptButton = new wxButton(this, wxNewId(), _("Zatwierdź"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_SINGLE_PLAYER_ACCEPT_ATTEMPT_BUTTON"));
-    GameBoard->Add(AcceptAttemptButton, 0, wxALL, 5);
+    CurrentAttemptGridBox->Layout();
     SinglePlayerContentFlexbox->Fit(this);
+}
+
+void SoloPlayerUI::OnAcceptAttemptClick(wxCommandEvent& evt) {
+    std::vector<std::string> digits;
+    //wxMessageBox("on click", "Message Box", wxOK | wxICON_INFORMATION);
+
+    for (wxTextCtrl* textCtrl : this->currentAttemptCtrls) {
+        std::string value = textCtrl->GetValue().ToStdString();
+        digits.push_back(value);
+    }
+
+    if(digits.size() > 0) {
+        Attempt attempt(digits);
+        this->game->getPlayer1()->addAttempt(attempt);
+    }
+
+    this->generateAttempts();
 }
 
 SoloPlayerUI::~SoloPlayerUI()
 {
+    delete this->game;
 	//(*Destroy(SoloPlayerUI)
 	//*)
 }

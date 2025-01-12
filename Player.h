@@ -12,6 +12,7 @@ class Player {
     public:
         Player(std::string nickname);
         std::vector<Attempt> getAttempts();
+        void addAttempt(Attempt attempt);
 };
 
 #endif // PLAYER_H_INCLUDED

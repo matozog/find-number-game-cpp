@@ -1,14 +1,15 @@
 #include "Attempt.h"
 
-Attempt::Attempt(std::vector<int> digits){
-    this->digits = digits;
+Attempt::Attempt(const std::vector<std::string>& digits) : digits(digits), solution(nullptr) {
+    // Optionally initialize solution if needed
 }
 
-std::vector<int> Attempt::getDigits() {
+const std::vector<std::string>& Attempt::getDigits() const {
     return this->digits;
 }
 
-Attempt::~Attempt()
-{
-	delete this->solution;
+Attempt::~Attempt() {
+    if (solution) {
+        delete solution;
+    }
 }

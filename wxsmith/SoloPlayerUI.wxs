@@ -108,8 +108,11 @@
 				<option>1</option>
 			</object>
 			<object class="sizeritem">
-				<object class="wxGrid" name="ID_SINGLE_PLAYER_BOARD" variable="SinglePlayerBoardGrid" member="yes" />
-				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<object class="wxGridSizer" variable="GameBoard" member="no">
+					<cols>3</cols>
+					<rows>1</rows>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
 				<option>1</option>
 			</object>
