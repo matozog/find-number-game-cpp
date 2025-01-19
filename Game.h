@@ -9,6 +9,7 @@ class Game{
 private:
     Level *level;
     std::string type;
+    std::vector<std::string> solution; // Liczba wygenerowana przez komputer
     Player* player1;
     Player* player2;
 
@@ -18,6 +19,10 @@ public:
     Level* getLevel();
     Player* getPlayer1();
     Player* getPlayer2();
+
+    void setSolution(const std::vector<std::string>& solution);
+    std::vector<std::string> getSolution() const;
+    bool checkGuess(const std::vector<std::string>& guess);
 };
 
 #endif // GAME_H_INCLUDED

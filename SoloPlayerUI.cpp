@@ -33,31 +33,53 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 
 	Create(parent, wxID_ANY, _("Tryb jednoosobowy"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
 	SinglePlayerContentFlexbox = new wxFlexGridSizer(5, 1, 0, 0);
-	GridSizer1 = new wxGridSizer(2, 3, 0, 0);
+	GridSizer1 = new wxGridSizer(1, 3, 0, 0);
+
+	// Player nickname
+	wxBoxSizer* PlayerNicknameBox = new wxBoxSizer(wxHORIZONTAL);
 	StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("Gracz"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
-	GridSizer1->Add(StaticText2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	StaticText3 = new wxStaticText(this, ID_STATICTEXT3, _("Zbiór"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
-	GridSizer1->Add(StaticText3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	PlayerNicknameBox->Add(StaticText2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    PlayerNicknameTextField = new wxTextCtrl(this, ID_PLAYER_NICKNAME_TEXT_FIELD, _("Text"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_PLAYER_NICKNAME_TEXT_FIELD"));
+	PlayerNicknameBox->Add(PlayerNicknameTextField, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	GridSizer1->Add(PlayerNicknameBox, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+
+	//Level
+    wxBoxSizer* LevelBox = new wxBoxSizer(wxHORIZONTAL);
+	StaticText3 = new wxStaticText(this, ID_STATICTEXT3, _("Poziom trudności"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
+	LevelBox->Add(StaticText3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, _("Text"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL2"));
+	LevelBox->Add(TextCtrl2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    GridSizer1->Add(LevelBox, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+
+	// Info
+    wxBoxSizer* GameInfoBox = new wxBoxSizer(wxHORIZONTAL);
 	StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _("Ilość cryfr w liczbie"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
-	GridSizer1->Add(StaticText4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	PlayerNicknameTextField = new wxTextCtrl(this, ID_PLAYER_NICKNAME_TEXT_FIELD, _("Text"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_PLAYER_NICKNAME_TEXT_FIELD"));
-	GridSizer1->Add(PlayerNicknameTextField, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, _("Text"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL2"));
-	GridSizer1->Add(TextCtrl2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	GameInfoBox->Add(StaticText4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	TextCtrl3 = new wxTextCtrl(this, ID_TEXTCTRL3, _("Text"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL3"));
-	GridSizer1->Add(TextCtrl3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	GameInfoBox->Add(TextCtrl3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    GridSizer1->Add(GameInfoBox, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+
+    // Game board
 	SinglePlayerContentFlexbox->Add(GridSizer1, 1, wxALL|wxEXPAND, 5);
     GameBoard = new wxFlexGridSizer(2, 1, 0, 0);
 	SinglePlayerContentFlexbox->Add(GameBoard, 1, wxALL|wxEXPAND, 5);
+
 	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
+
+	// Amount of attempts
+    StaticText6 = new wxStaticText(this, ID_STATICTEXT6, _("Ilość prób:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
+	BoxSizer1->Add(StaticText6, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	AttemptsTextField = new wxTextCtrl(this, ID_ATTEMPTS_TEXT_FIELD, _("0"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_ATTEMPTS_TEXT_FIELD"));
+	BoxSizer1->Add(AttemptsTextField, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+
+	BoxSizer1->AddStretchSpacer(1); // Add stretchable space
+
+	// Timer
 	StaticText5 = new wxStaticText(this, ID_STATICTEXT5, _("Czas:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
 	BoxSizer1->Add(StaticText5, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	TimerTextField = new wxTextCtrl(this, ID_TIMER_TEXT_FIELD, _("Text"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TIMER_TEXT_FIELD"));
+	TimerTextField = new wxTextCtrl(this, ID_TIMER_TEXT_FIELD, _("0"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TIMER_TEXT_FIELD"));
 	BoxSizer1->Add(TimerTextField, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	StaticText6 = new wxStaticText(this, ID_STATICTEXT6, _("Ilość prób:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
-	BoxSizer1->Add(StaticText6, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	AttemptsTextField = new wxTextCtrl(this, ID_ATTEMPTS_TEXT_FIELD, _("Text"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_ATTEMPTS_TEXT_FIELD"));
-	BoxSizer1->Add(AttemptsTextField, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+
 	SinglePlayerContentFlexbox->Add(BoxSizer1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(SinglePlayerContentFlexbox);
 	Timer1.SetOwner(this, ID_TIMER1);
@@ -85,17 +107,33 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
     AcceptAttemptButton->Bind(wxEVT_BUTTON, &SoloPlayerUI::OnAcceptAttemptClick, this);
 }
 
+std::string joinStrings(const std::vector<std::string>& strings, const std::string& delimiter) {
+    std::string result;
+    for (size_t i = 0; i < strings.size(); ++i) {
+        result += strings[i];
+        if (i < strings.size() - 1) {
+            result += delimiter; // Add the delimiter except after the last element
+        }
+    }
+    return result;
+}
+
 void SoloPlayerUI::createGameBoard(Game* game){
     this->game = game;
     PlayerAttemptsGridBox->SetCols(game->getLevel()->getAmountOfDigits() + 1);
+    PlayerNicknameTextField->SetValue(game->getPlayer1()->getNickname());
+    TextCtrl2->SetValue(game->getLevel()->getLevelTypeText());
+    TextCtrl3->SetValue(joinStrings(game->getSolution(), ""));
     this->generateCurrentAttempt();
     SinglePlayerContentFlexbox->Layout();
 }
 
-void SoloPlayerUI::generateAttempts(Attempt attempt) {
+void SoloPlayerUI::generateAttempt(Attempt attempt) {
     Player* player1 = game->getPlayer1();
     int amountOfAttempts = player1->getAttempts().size();
     PlayerAttemptsGridBox->SetRows(amountOfAttempts);
+
+    AttemptsTextField->SetValue(std::to_string(amountOfAttempts));
 
     for(int j=0; j<attempt.getDigits().size(); j++){
         wxString id = wxString::Format("ID_SINGLE_PLAYER_ATTEMPT_%d", j);
@@ -125,7 +163,20 @@ void SoloPlayerUI::generateCurrentAttempt() {
     currentAttemptCtrls.clear();
     for(int i=0; i<level->getAmountOfDigits(); i++){
         std::string cellId = "ID_SINGLE_PLAYER_CURRENT_ATTEMPT_" + i;
-        wxTextCtrl* currentAttemptCell = new wxTextCtrl(this, wxNewId(), _(std::to_string(i + 1)), wxDefaultPosition, wxSize(40, 30), wxTE_READONLY, wxDefaultValidator, cellId);
+        wxTextCtrl* currentAttemptCell = new wxTextCtrl(this, wxNewId(), _(std::to_string(i + 1)), wxDefaultPosition, wxSize(40, 30), 0, wxDefaultValidator, cellId);
+        //currentAttemptCell->Bind(wxEVT_TEXT, &SoloPlayerUI::OnTextChange, this);
+         currentAttemptCell->Bind(wxEVT_TEXT, [currentAttemptCell](wxCommandEvent& event) {
+            wxString value = currentAttemptCell->GetValue();
+
+            // Allow only one digit (0-9)
+            if (value.length() > 1 || !value.IsEmpty() && !wxIsdigit(value[0])) {
+                currentAttemptCell->SetValue(value.substr(0, 1));
+                currentAttemptCell->SetInsertionPointEnd(); // Maintain cursor position
+            }
+
+            event.Skip(); // Let the event propagate
+        });
+
         currentAttemptCtrls.push_back(currentAttemptCell);
         CurrentAttemptGridBox->Add(currentAttemptCell, 1, wxALL, 5);
     }
@@ -143,15 +194,36 @@ void SoloPlayerUI::OnAcceptAttemptClick(wxCommandEvent& evt) {
         digits.push_back(value);
     }
 
+    if (game->checkGuess(digits)) {
+        wxMessageBox("Brawo! Zgadłeś liczbę!", "Sukces", wxOK | wxICON_INFORMATION);
+    } else {
+        wxMessageBox("Nie zgadłeś. Spróbuj ponownie!", "Błąd", wxOK | wxICON_ERROR);
+    }
+
     if(digits.size() > 0) {
         Attempt attempt(digits);
         this->game->getPlayer1()->addAttempt(attempt);
-        this->generateAttempts(attempt);
+        this->generateAttempt(attempt);
 
         scrolledWindow->FitInside();
         scrolledWindow->Layout();
     }
 
+}
+
+void SoloPlayerUI::OnTextChange(wxCommandEvent& evt){
+        wxString value = evt.GetString();
+
+        // Allow only one digit (0-9)
+        if (value.length() > 1 || !value.IsEmpty() && !wxIsdigit(value[0])) {
+            //singleDigitCtrl->SetValue(value.substr(0, 1));
+            //singleDigitCtrl->SetInsertionPointEnd(); // Maintain cursor position
+        }
+
+        //event.Skip();
+
+        // Print or use the new value
+        //wxLogMessage("Text changed: %s", newValue);
 }
 
 SoloPlayerUI::~SoloPlayerUI()

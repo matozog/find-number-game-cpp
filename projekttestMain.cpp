@@ -157,6 +157,7 @@ void projekttestDialog::OnMultiPlayerCheck(wxCommandEvent& event){
 
 void projekttestDialog::createGame() {
     Level* level = new Level(LevelChoice->GetStringSelection().ToUTF8().data());
+
     std::string gameType = SinglePlayerCheckbox->IsChecked() ? "single" : "multi";
     Player* player1 = new Player(Player1TextField->GetValue().ToStdString());
     if(gameType == "single") {
@@ -165,6 +166,9 @@ void projekttestDialog::createGame() {
         Player* player2 = new Player(Player2TextField->GetValue().ToStdString());
         this->game = new Game(level, gameType, player1, player2);
     }
+
+    std::vector<std::string> randomNumber = level->generateRandomNumber();
+    this->game->setSolution(randomNumber);
 }
 
 projekttestDialog::~projekttestDialog()

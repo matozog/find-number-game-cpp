@@ -11,3 +11,7 @@ std::vector<Attempt> Player::getAttempts(){
 void Player::addAttempt(Attempt attempt) {
     this->attempts.push_back(attempt);
 }
+
+std::string Player::getNickname(){
+    return this->nickname;
+}

@@ -2066,7 +2066,7 @@
 1736177434 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\qt\tglbtn.h
 	"wx/tglbtn.h"
 
-1736704130 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
+1737289727 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
 	"projekttestMain.h"
 	<wx/msgdlg.h>
 	<wx/wx.h>
@@ -2112,13 +2112,13 @@
 
 1736177431 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\msw\rcdefs.h
 
-1737279161 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
+1737288812 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
 	"SoloPlayerUI.h"
 	<wx/wx.h>
 	<wx/intl.h>
 	<wx/string.h>
 
-1736896658 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
+1737288122 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
 	"Game.h"
 	<wx/dialog.h>
 	<wx/sizer.h>
@@ -2126,16 +2126,18 @@
 	<wx/textctrl.h>
 	<wx/timer.h>
 
-1736690564 c:\users\ozogm\documents\cpp\projects\projekttest\game.h
+1737289162 c:\users\ozogm\documents\cpp\projects\projekttest\game.h
 	"Level.h"
 	"Player.h"
 	<string>
 
-1736691328 c:\users\ozogm\documents\cpp\projects\projekttest\level.h
+1737289782 c:\users\ozogm\documents\cpp\projects\projekttest\level.h
 	<string>
 	<vector>
+	<cstdlib>
+	<ctime>
 
-1736724737 c:\users\ozogm\documents\cpp\projects\projekttest\player.h
+1737286422 c:\users\ozogm\documents\cpp\projects\projekttest\player.h
 	"Attempt.h"
 	<string>
 
@@ -2146,13 +2148,13 @@
 1736725068 source:c:\users\ozogm\documents\cpp\projects\projekttest\attempt.cpp
 	"Attempt.h"
 
-1736724733 source:c:\users\ozogm\documents\cpp\projects\projekttest\player.cpp
+1737286391 source:c:\users\ozogm\documents\cpp\projects\projekttest\player.cpp
 	"Player.h"
 
-1736691398 source:c:\users\ozogm\documents\cpp\projects\projekttest\level.cpp
+1737289707 source:c:\users\ozogm\documents\cpp\projects\projekttest\level.cpp
 	"Level.h"
 
-1736690604 source:c:\users\ozogm\documents\cpp\projects\projekttest\game.cpp
+1737289087 source:c:\users\ozogm\documents\cpp\projects\projekttest\game.cpp
 	"Game.h"
 
 1736177427 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\wx.h

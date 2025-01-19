@@ -19,7 +19,7 @@ class SoloPlayerUI: public wxDialog
 	public:
 		SoloPlayerUI(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize);
 		void createGameBoard(Game* game);
-		void generateAttempts(Attempt attempt);
+		void generateAttempt(Attempt attempt);
 		void generateCurrentAttempt();
 		virtual ~SoloPlayerUI();
 
@@ -31,6 +31,7 @@ class SoloPlayerUI: public wxDialog
         wxButton* AcceptAttemptButton;
 
         void OnAcceptAttemptClick(wxCommandEvent& evt);
+        void OnTextChange(wxCommandEvent& evt);
 
 		//(*Declarations(SoloPlayerUI)
 		wxStaticText* StaticText2;

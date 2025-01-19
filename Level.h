@@ -3,6 +3,8 @@
 
 #include<string>
 #include<vector>
+#include <cstdlib>  // For std::rand and std::srand
+#include <ctime>
 
 enum LevelType{
     LOW,
@@ -14,11 +16,13 @@ class Level{
 private:
     LevelType type;
     int amountOfDigits;
-    std::vector<int> setOfDigits;
+    std::vector<std::string> setOfDigits;
 
 public:
     Level(const std::string type);
     int getAmountOfDigits();
+    std::string getLevelTypeText();
+    std::vector<std::string> generateRandomNumber(); // Nowa metoda
 };
 
 #endif // LEVEL_H_INCLUDED
