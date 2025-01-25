@@ -15,6 +15,8 @@
 #include "Game.h"
 #include "RankingDialog.h"
 #include <wx/button.h>
+#include <vector>
+#include "PlayerStats.h"
 
 #undef _
 #define _(s) wxString::FromUTF8(s)
@@ -35,12 +37,14 @@ class projekttestDialog: public wxDialog
     public:
         projekttestDialog(wxWindow* parent,wxWindowID id = -1);
         void createGame();
+        void loadPlayersRanking();
         virtual ~projekttestDialog();
 
     private:
         MultiPlayerUI* multiPlayerDialog;
         SoloPlayerUI* singlePlayerDialog;
         RankingDialog* rankingDialog;
+        std::vector<PlayerStats> playersStats;
         Game* game;
 
         //(*Handlers(projekttestDialog)

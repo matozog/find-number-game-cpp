@@ -1,6 +1,9 @@
 #ifndef RANKINGDIALOG_H
 #define RANKINGDIALOG_H
 
+#include <vector>
+#include "PlayerStats.h"
+
 //(*Headers(RankingDialog)
 #include <wx/choice.h>
 #include <wx/dialog.h>
@@ -13,7 +16,7 @@ class RankingDialog: public wxDialog
 {
 	public:
 
-		RankingDialog(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize);
+		RankingDialog(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize, const std::vector<PlayerStats>& playersStats = std::vector<PlayerStats>());
 		virtual ~RankingDialog();
 
 		//(*Declarations(RankingDialog)
@@ -35,7 +38,9 @@ class RankingDialog: public wxDialog
 		//*)
 
 	private:
-
+	    wxGrid* statsGrid;
+        std::vector<PlayerStats> playersStats;
+        void recalculateGridData();
 		//(*Handlers(RankingDialog)
 		//*)
 

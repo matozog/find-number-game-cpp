@@ -200,18 +200,15 @@ void SoloPlayerUI::OnAcceptAttemptClick(wxCommandEvent& evt) {
     if (game->checkGuess(digits)) {
         wxMessageBox(_("Brawo! Zgadłeś liczbę!"), _("Sukces"), wxOK | wxICON_INFORMATION);
     } else {
-        wxMessageBox(_("Nie zgadłeś. Spróbuj ponownie!"), _("Błąd"), wxOK | wxICON_ERROR);
+        if(digits.size() > 0) {
+            Attempt attempt(digits);
+            this->game->getPlayer1()->addAttempt(attempt);
+            this->generateAttempt(attempt);
+
+            scrolledWindow->FitInside();
+            scrolledWindow->Layout();
+        }
     }
-
-    if(digits.size() > 0) {
-        Attempt attempt(digits);
-        this->game->getPlayer1()->addAttempt(attempt);
-        this->generateAttempt(attempt);
-
-        scrolledWindow->FitInside();
-        scrolledWindow->Layout();
-    }
-
 }
 
 void SoloPlayerUI::OnTextChange(wxCommandEvent& evt){

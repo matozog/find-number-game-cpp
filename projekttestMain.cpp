@@ -10,6 +10,9 @@
 #include "projekttestMain.h"
 #include <wx/msgdlg.h>
 #include <wx/wx.h>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 //(*InternalHeaders(projekttestDialog)
 #include <wx/intl.h>
@@ -117,6 +120,7 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
     FlexGridSizer1->Fit(this);
     FlexGridSizer1->SetSizeHints(this);
     //*)
+    this->loadPlayersRanking();
 
     PlayButton->Bind(wxEVT_BUTTON, &projekttestDialog::OnPlayButtonClick, this);
     RankingButton->Bind(wxEVT_BUTTON, &projekttestDialog::OnShowRanking, this);
@@ -125,7 +129,7 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
 
     multiPlayerDialog = new MultiPlayerUI(parent, 1, wxDefaultPosition, wxDefaultSize);
     singlePlayerDialog = new SoloPlayerUI(parent, 2, wxDefaultPosition, wxDefaultSize);
-    rankingDialog = new RankingDialog(parent, 3, wxDefaultPosition, wxDefaultSize);
+    rankingDialog = new RankingDialog(parent, 3, wxDefaultPosition, wxDefaultSize, this->playersStats);
 }
 
 void projekttestDialog::OnPlayButtonClick(wxCommandEvent& event)
@@ -171,6 +175,36 @@ void projekttestDialog::createGame() {
 
     std::vector<std::string> randomNumber = level->generateRandomNumber();
     this->game->setSolution(randomNumber);
+}
+
+void projekttestDialog::loadPlayersRanking() {
+    std::ifstream file("ranking.csv"); // Open the file
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open file " << "ranking.csv" << "\n";
+        return;
+    }
+
+    std::string line;
+    while (std::getline(file, line)) { // Read each line
+        std::stringstream ss(line);
+        std::string nick, level, attemptsStr, timeStr;
+
+        // Parse the CSV line (comma-separated values)
+        if (std::getline(ss, nick, ',') &&
+            std::getline(ss, level, ',') &&
+            std::getline(ss, attemptsStr, ',') &&
+            std::getline(ss, timeStr, ',')) {
+
+            // Convert attempts and time to the correct types
+            int attempts = std::stoi(attemptsStr);
+            double time = std::stod(timeStr);
+
+            // Create a PlayerStats object and add it to the vector
+            this->playersStats.emplace_back(nick, level, attempts, time);
+        }
+    }
+
+    file.close(); // Close the file
 }
 
 void projekttestDialog::OnShowRanking(wxCommandEvent& event){

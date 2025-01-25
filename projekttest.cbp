@@ -73,6 +73,12 @@
 		<Unit filename="MultiPlayerUI.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
+		<Unit filename="PlayerStats.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="PlayerStats.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="RankingDialog.cpp" />
 		<Unit filename="RankingDialog.h" />
 		<Unit filename="SoloPlayerUI.cpp" />
