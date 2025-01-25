@@ -13,6 +13,7 @@
 #include "MultiPlayerUI.h"
 #include "SoloPlayerUI.h"
 #include "Game.h"
+#include "RankingDialog.h"
 #include <wx/button.h>
 
 #undef _
@@ -39,12 +40,14 @@ class projekttestDialog: public wxDialog
     private:
         MultiPlayerUI* multiPlayerDialog;
         SoloPlayerUI* singlePlayerDialog;
+        RankingDialog* rankingDialog;
         Game* game;
 
         //(*Handlers(projekttestDialog)
         void OnPlayButtonClick(wxCommandEvent& event);
         void OnSinglePlayerCheck(wxCommandEvent& event);
         void OnMultiPlayerCheck(wxCommandEvent& event);
+        void OnShowRanking(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(projekttestDialog)

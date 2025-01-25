@@ -6,6 +6,9 @@
 #include <wx/string.h>
 //*)
 
+#undef _
+#define _(s) wxString::FromUTF8(s)
+
 //(*IdInit(SoloPlayerUI)
 const long SoloPlayerUI::ID_STATICTEXT2 = wxNewId();
 const long SoloPlayerUI::ID_STATICTEXT3 = wxNewId();
@@ -122,7 +125,7 @@ void SoloPlayerUI::createGameBoard(Game* game){
     this->game = game;
     PlayerAttemptsGridBox->SetCols(game->getLevel()->getAmountOfDigits() + 1);
     PlayerNicknameTextField->SetValue(game->getPlayer1()->getNickname());
-    TextCtrl2->SetValue(game->getLevel()->getLevelTypeText());
+    TextCtrl2->SetValue(_(game->getLevel()->getLevelTypeText()));
     TextCtrl3->SetValue(joinStrings(game->getSolution(), ""));
     this->generateCurrentAttempt();
     SinglePlayerContentFlexbox->Layout();
@@ -195,9 +198,9 @@ void SoloPlayerUI::OnAcceptAttemptClick(wxCommandEvent& evt) {
     }
 
     if (game->checkGuess(digits)) {
-        wxMessageBox("Brawo! Zgadłeś liczbę!", "Sukces", wxOK | wxICON_INFORMATION);
+        wxMessageBox(_("Brawo! Zgadłeś liczbę!"), _("Sukces"), wxOK | wxICON_INFORMATION);
     } else {
-        wxMessageBox("Nie zgadłeś. Spróbuj ponownie!", "Błąd", wxOK | wxICON_ERROR);
+        wxMessageBox(_("Nie zgadłeś. Spróbuj ponownie!"), _("Błąd"), wxOK | wxICON_ERROR);
     }
 
     if(digits.size() > 0) {

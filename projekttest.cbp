@@ -15,6 +15,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="$(#wx)/lib/gcc_lib/mswu" />
+					<Add directory="include" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_lib/mswu" />
@@ -72,6 +73,8 @@
 		<Unit filename="MultiPlayerUI.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
+		<Unit filename="RankingDialog.cpp" />
+		<Unit filename="RankingDialog.h" />
 		<Unit filename="SoloPlayerUI.cpp" />
 		<Unit filename="SoloPlayerUI.h" />
 		<Unit filename="projekttestApp.cpp" />
@@ -82,6 +85,7 @@
 			<Option compilerVar="WINDRES" />
 		</Unit>
 		<Unit filename="wxsmith/MultiPlayerUI.wxs" />
+		<Unit filename="wxsmith/RankingDialog.wxs" />
 		<Unit filename="wxsmith/SoloPlayerUI.wxs" />
 		<Unit filename="wxsmith/projekttestdialog.wxs" />
 		<Extensions>
@@ -92,6 +96,7 @@
 					<wxDialog wxs="wxsmith/projekttestdialog.wxs" src="projekttestMain.cpp" hdr="projekttestMain.h" fwddecl="0" i18n="1" name="projekttestDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/SoloPlayerUI.wxs" src="SoloPlayerUI.cpp" hdr="SoloPlayerUI.h" fwddecl="0" i18n="1" name="SoloPlayerUI" language="CPP" />
 					<wxDialog wxs="wxsmith/MultiPlayerUI.wxs" src="MultiPlayerUI.cpp" hdr="MultiPlayerUI.h" fwddecl="0" i18n="1" name="MultiPlayerUI" language="CPP" />
+					<wxDialog wxs="wxsmith/RankingDialog1.wxs" src="RankingDialog.cpp" hdr="RankingDialog.h" fwddecl="0" i18n="1" name="RankingDialog" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>

@@ -119,11 +119,13 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
     //*)
 
     PlayButton->Bind(wxEVT_BUTTON, &projekttestDialog::OnPlayButtonClick, this);
+    RankingButton->Bind(wxEVT_BUTTON, &projekttestDialog::OnShowRanking, this);
     SinglePlayerCheckbox->Bind(wxEVT_CHECKBOX, &projekttestDialog::OnSinglePlayerCheck, this);
     MultiPlayerCheckbox->Bind(wxEVT_CHECKBOX, &projekttestDialog::OnMultiPlayerCheck, this);
 
     multiPlayerDialog = new MultiPlayerUI(parent, 1, wxDefaultPosition, wxDefaultSize);
     singlePlayerDialog = new SoloPlayerUI(parent, 2, wxDefaultPosition, wxDefaultSize);
+    rankingDialog = new RankingDialog(parent, 3, wxDefaultPosition, wxDefaultSize);
 }
 
 void projekttestDialog::OnPlayButtonClick(wxCommandEvent& event)
@@ -169,6 +171,10 @@ void projekttestDialog::createGame() {
 
     std::vector<std::string> randomNumber = level->generateRandomNumber();
     this->game->setSolution(randomNumber);
+}
+
+void projekttestDialog::OnShowRanking(wxCommandEvent& event){
+    this->rankingDialog->ShowModal();
 }
 
 projekttestDialog::~projekttestDialog()
