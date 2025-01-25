@@ -66,6 +66,7 @@ class SoloPlayerUI: public wxDialog
 	private:
         Game* game;
         std::vector<wxTextCtrl*> currentAttemptCtrls;
+        void OnCloseGame(wxCloseEvent& event);
 		//(*Handlers(SoloPlayerUI)
 		//*)
 

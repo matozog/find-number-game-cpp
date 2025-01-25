@@ -127,18 +127,18 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
     SinglePlayerCheckbox->Bind(wxEVT_CHECKBOX, &projekttestDialog::OnSinglePlayerCheck, this);
     MultiPlayerCheckbox->Bind(wxEVT_CHECKBOX, &projekttestDialog::OnMultiPlayerCheck, this);
 
-    multiPlayerDialog = new MultiPlayerUI(parent, 1, wxDefaultPosition, wxDefaultSize);
-    singlePlayerDialog = new SoloPlayerUI(parent, 2, wxDefaultPosition, wxDefaultSize);
     rankingDialog = new RankingDialog(parent, 3, wxDefaultPosition, wxDefaultSize, this->playersStats);
 }
 
 void projekttestDialog::OnPlayButtonClick(wxCommandEvent& event)
 {
     this->createGame();
-    singlePlayerDialog->createGameBoard(this->game);
     if(SinglePlayerCheckbox->IsChecked()){
+        singlePlayerDialog = new SoloPlayerUI(this, 2, wxDefaultPosition, wxDefaultSize);
+        singlePlayerDialog->createGameBoard(this->game);
         singlePlayerDialog->ShowModal();
     } else {
+        multiPlayerDialog = new MultiPlayerUI(this, 1, wxDefaultPosition, wxDefaultSize);
         multiPlayerDialog->ShowModal();
     }
 }

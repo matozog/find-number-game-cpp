@@ -108,6 +108,9 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
     SinglePlayerContentFlexbox->Fit(this);
 
     AcceptAttemptButton->Bind(wxEVT_BUTTON, &SoloPlayerUI::OnAcceptAttemptClick, this);
+
+    this->Bind(wxEVT_CLOSE_WINDOW, &SoloPlayerUI::OnCloseGame, this);
+
 }
 
 std::string joinStrings(const std::vector<std::string>& strings, const std::string& delimiter) {
@@ -226,9 +229,14 @@ void SoloPlayerUI::OnTextChange(wxCommandEvent& evt){
         //wxLogMessage("Text changed: %s", newValue);
 }
 
-SoloPlayerUI::~SoloPlayerUI()
-{
+void SoloPlayerUI::OnCloseGame(wxCloseEvent& event) {
     delete this->game;
+    this->currentAttemptCtrls.clear();
+    this->EndModal(wxID_OK);
+}
+
+SoloPlayerUI::~SoloPlayerUI()
+{    delete this->game;
 	//(*Destroy(SoloPlayerUI)
 	//*)
 }

@@ -3,6 +3,7 @@
 //(*InternalHeaders(RankingDialog)
 #include <wx/intl.h>
 #include <wx/string.h>
+#include <wx/msgdlg.h>
 //*)
 
 #undef _
@@ -68,27 +69,69 @@ RankingDialog::RankingDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 	FlexGridSizer1->SetSizeHints(this);
 	//*)
 
+    this->FilterGridDataByLevel();
 	this->recalculateGridData();
+
+    LevelChoice->Bind(wxEVT_CHOICE, &RankingDialog::OnChangeLevel, this);
+    OptionsChoice->Bind(wxEVT_CHOICE, &RankingDialog::OnChangeOption, this);
+
 }
 
 void RankingDialog::recalculateGridData() {
-    // To function
+    if(_(OptionsChoice->GetStringSelection().ToUTF8().data()) == "Czas"){
+        this->SortStatsByTIme();
+    } else {
+        this->SortStatsByAttempts();
+    }
     statsGrid->ClearGrid(); // Clear any existing grid data
 
     // Add rows for the number of players
-    if (statsGrid->GetNumberRows() < static_cast<int>(this->playersStats.size())) {
-        statsGrid->AppendRows(this->playersStats.size() - statsGrid->GetNumberRows());
+    if (statsGrid->GetNumberRows() < static_cast<int>(this->filteredStats.size())) {
+        statsGrid->AppendRows(this->filteredStats.size() - statsGrid->GetNumberRows());
     }
 
     // Populate grid with player data
-    for (size_t i = 0; i < this->playersStats.size(); ++i) {
-        statsGrid->SetCellValue(i, 0, this->playersStats[i].getNick());
-        statsGrid->SetCellValue(i, 1, _(this->playersStats[i].getLevel()));
-        statsGrid->SetCellValue(i, 2, wxString::Format("%d", this->playersStats[i].getAttempts()));
-        statsGrid->SetCellValue(i, 3, wxString::Format("%.2f", this->playersStats[i].getTime()));
+    for (size_t i = 0; i < this->filteredStats.size(); ++i) {
+        statsGrid->SetCellValue(i, 0, this->filteredStats[i].getNick());
+        statsGrid->SetCellValue(i, 1, _(this->filteredStats[i].getLevel()));
+        statsGrid->SetCellValue(i, 2, wxString::Format("%d", this->filteredStats[i].getAttempts()));
+        statsGrid->SetCellValue(i, 3, wxString::Format("%.2f", this->filteredStats[i].getTime()));
     }
 
     statsGrid->AutoSizeColumns(); // Adjust column sizes to fit content
+}
+
+void RankingDialog::OnChangeLevel(wxCommandEvent& event) {
+    FilterGridDataByLevel();
+
+    this->recalculateGridData();
+}
+
+void RankingDialog::FilterGridDataByLevel(){
+    wxString selectedLevel = LevelChoice->GetStringSelection().ToUTF8().data();
+
+    // Filter players by the selected level
+    this->filteredStats.clear();
+    std::copy_if(this->playersStats.begin(), this->playersStats.end(), std::back_inserter(filteredStats),
+             [&selectedLevel](const PlayerStats& player) {
+                 return _(player.getLevel()) == _(selectedLevel);
+             });
+}
+
+void RankingDialog::OnChangeOption(wxCommandEvent& event) {
+    this->recalculateGridData();
+}
+
+void RankingDialog::SortStatsByAttempts(){
+    std::sort(this->filteredStats.begin(), this->filteredStats.end(), [](const PlayerStats& a, const PlayerStats& b) {
+        return a.getAttempts() < b.getAttempts();
+    });
+}
+
+void RankingDialog::SortStatsByTIme() {
+    std::sort(this->filteredStats.begin(), this->filteredStats.end(), [](const PlayerStats& a, const PlayerStats& b) {
+        return a.getTime() < b.getTime();
+    });
 }
 
 RankingDialog::~RankingDialog()
