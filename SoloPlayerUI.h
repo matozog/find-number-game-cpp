@@ -32,6 +32,8 @@ class SoloPlayerUI: public wxDialog
 
         void OnAcceptAttemptClick(wxCommandEvent& evt);
         void OnTextChange(wxCommandEvent& evt);
+        void OnTimerTick(wxTimerEvent& event);
+        void UpdateAcceptButtonState();
 
 		//(*Declarations(SoloPlayerUI)
 		wxStaticText* StaticText2;
@@ -67,6 +69,7 @@ class SoloPlayerUI: public wxDialog
         Game* game;
         std::vector<wxTextCtrl*> currentAttemptCtrls;
         void OnCloseGame(wxCloseEvent& event);
+        double elapsedTime = 0.0;
 		//(*Handlers(SoloPlayerUI)
 		//*)
 

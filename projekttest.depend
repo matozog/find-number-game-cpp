@@ -2118,13 +2118,13 @@
 
 1736177431 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\msw\rcdefs.h
 
-1737890823 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
+1737895809 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
 	"SoloPlayerUI.h"
 	<wx/wx.h>
 	<wx/intl.h>
 	<wx/string.h>
 
-1737806599 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
+1737895675 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
 	"Game.h"
 	<wx/dialog.h>
 	<wx/sizer.h>

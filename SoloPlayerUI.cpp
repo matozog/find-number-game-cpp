@@ -56,7 +56,7 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 
 	// Info
     wxBoxSizer* GameInfoBox = new wxBoxSizer(wxHORIZONTAL);
-	StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _("Ilość cryfr w liczbie"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
+	StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _("Szukana liczba:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
 	GameInfoBox->Add(StaticText4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	TextCtrl3 = new wxTextCtrl(this, ID_TEXTCTRL3, _("Text"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL3"));
 	GameInfoBox->Add(TextCtrl3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
@@ -111,15 +111,20 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
     AcceptAttemptButton->Bind(wxEVT_BUTTON, &SoloPlayerUI::OnAcceptAttemptClick, this);
 
     this->Bind(wxEVT_CLOSE_WINDOW, &SoloPlayerUI::OnCloseGame, this);
+    // Bind timer event
+    this->Bind(wxEVT_TIMER, &SoloPlayerUI::OnTimerTick, this);
+
+    // Timer
+    Timer1.Start(100);
 }
 
 std::string joinStrings(const std::vector<std::string>& strings, const std::string& delimiter) {
     std::string result;
     for (size_t i = 0; i < strings.size(); ++i) {
-        result += strings[i];
-        if (i < strings.size() - 1) {
+        result += "?";
+        /*if (i < strings.size() - 1) {
             result += delimiter; // Add the delimiter except after the last element
-        }
+        }*/
     }
     return result;
 }
@@ -191,7 +196,7 @@ void SoloPlayerUI::generateCurrentAttempt() {
         std::string cellId = "ID_SINGLE_PLAYER_CURRENT_ATTEMPT_" + i;
         wxTextCtrl* currentAttemptCell = new wxTextCtrl(this, wxNewId(), "", wxDefaultPosition, wxSize(40, 30), 0, wxDefaultValidator, cellId);
         //currentAttemptCell->Bind(wxEVT_TEXT, &SoloPlayerUI::OnTextChange, this);
-         currentAttemptCell->Bind(wxEVT_TEXT, [currentAttemptCell](wxCommandEvent& event) {
+         currentAttemptCell->Bind(wxEVT_TEXT, [this, currentAttemptCell](wxCommandEvent& event) {
             wxString value = currentAttemptCell->GetValue();
 
             // Allow only one digit (0-9)
@@ -200,6 +205,8 @@ void SoloPlayerUI::generateCurrentAttempt() {
                 currentAttemptCell->SetInsertionPointEnd(); // Maintain cursor position
             }
 
+            this->UpdateAcceptButtonState();
+
             event.Skip(); // Let the event propagate
         });
 
@@ -207,9 +214,20 @@ void SoloPlayerUI::generateCurrentAttempt() {
         CurrentAttemptGridBox->Add(currentAttemptCell, 1, wxALL, 5);
     }
     CurrentAttemptGridBox->Add(AcceptAttemptButton, 0, wxALL, 5);
+    this->UpdateAcceptButtonState();
 
     CurrentAttemptGridBox->Layout();
     SinglePlayerContentFlexbox->Fit(this);
+}
+
+void SoloPlayerUI::UpdateAcceptButtonState() {
+    for (wxTextCtrl* textCtrl : currentAttemptCtrls) {
+        if (textCtrl->GetValue().IsEmpty()) {
+            AcceptAttemptButton->Disable();
+            return;
+        }
+    }
+    AcceptAttemptButton->Enable();
 }
 
 void SoloPlayerUI::OnAcceptAttemptClick(wxCommandEvent& evt) {
@@ -230,7 +248,10 @@ void SoloPlayerUI::OnAcceptAttemptClick(wxCommandEvent& evt) {
     }
 
     if (game->checkGuess(digits)) {
-        wxMessageBox(_("Brawo " + this->game->getPlayer1()->getNickname() + "! Zgadłeś liczbę! Potrzebowałeś " + std::to_string(this->game->getPlayer1()->getAttempts().size()) + " prób. Czas wyzwania wynosi: "), _("Sukces"), wxOK | wxICON_INFORMATION);
+        Timer1.Stop();
+        wxMessageBox(_("Brawo " + this->game->getPlayer1()->getNickname() + "! Zgadłeś liczbę! Potrzebowałeś "
+                       + std::to_string(this->game->getPlayer1()->getAttempts().size()) + " prób. Czas wyzwania wynosi: "
+                       + wxString::Format("%.1f s", elapsedTime)), _("Sukces"), wxOK | wxICON_INFORMATION);
     }
 }
 
@@ -253,6 +274,11 @@ void SoloPlayerUI::OnCloseGame(wxCloseEvent& event) {
     delete this->game;
     this->currentAttemptCtrls.clear();
     this->EndModal(wxID_OK);
+}
+
+void SoloPlayerUI::OnTimerTick(wxTimerEvent& event){
+     this->elapsedTime += 0.1;
+     TimerTextField->SetValue(wxString::Format("%.1f s", elapsedTime));
 }
 
 SoloPlayerUI::~SoloPlayerUI()
