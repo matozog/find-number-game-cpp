@@ -82,6 +82,7 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 	BoxSizer1->Add(StaticText5, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	TimerTextField = new wxTextCtrl(this, ID_TIMER_TEXT_FIELD, _("0"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TIMER_TEXT_FIELD"));
 	BoxSizer1->Add(TimerTextField, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	Timer1.SetOwner(this);
 
 	SinglePlayerContentFlexbox->Add(BoxSizer1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(SinglePlayerContentFlexbox);
@@ -110,7 +111,6 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
     AcceptAttemptButton->Bind(wxEVT_BUTTON, &SoloPlayerUI::OnAcceptAttemptClick, this);
 
     this->Bind(wxEVT_CLOSE_WINDOW, &SoloPlayerUI::OnCloseGame, this);
-
 }
 
 std::string joinStrings(const std::vector<std::string>& strings, const std::string& delimiter) {
@@ -147,8 +147,28 @@ void SoloPlayerUI::generateAttempt(Attempt attempt) {
         PlayerAttemptsGridBox->Add(attemptCell, 1, wxALL, 5);
     }
 
-    wxButton* ButtonTmp = new wxButton(scrolledWindow, wxNewId(), _("Tmp"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_SINGLE_PLAYER_ACCEPT_ATTEMPT_BUTTON-tmp"));
-    PlayerAttemptsGridBox->Add(ButtonTmp, 0, wxALL, 5);
+    wxBoxSizer* AttemptResultBoxSizer = new wxBoxSizer(wxHORIZONTAL);
+
+    // Load an image file
+    wxBitmap circleBitMap("assets/circle.png", wxBITMAP_TYPE_PNG);
+    // Load an image file
+    wxBitmap checkMarkBitMap("assets/check-mark.png", wxBITMAP_TYPE_PNG);
+    //wxMessageBox(std::to_string(attempt.getCorrectDigits()), _("Sukces"), wxOK | wxICON_INFORMATION);
+    for(int i = 0; i<attempt.getCorrectDigits(); i++) {
+        // Display the image in the panel
+        wxStaticBitmap* checkMarkIcon = new wxStaticBitmap(scrolledWindow, wxID_ANY, checkMarkBitMap, wxPoint(25, 25));
+        AttemptResultBoxSizer->Add(checkMarkIcon, 0, wxALL|wxCENTER, 5);
+    }
+
+    //wxMessageBox(std::to_string(attempt.getCorrectDigitsMisplaced()), _("Sukces"), wxOK | wxICON_INFORMATION);
+    for(int i = 0; i<attempt.getCorrectDigitsMisplaced(); i++) {
+        // Display the image in the panel
+        wxStaticBitmap* circleIcon = new wxStaticBitmap(scrolledWindow, wxID_ANY, circleBitMap, wxPoint(25, 25));
+        AttemptResultBoxSizer->Add(circleIcon, 0, wxALL|wxCENTER, 5);
+    }
+
+    //wxButton* ButtonTmp = new wxButton(scrolledWindow, wxNewId(), _("Tmp"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_SINGLE_PLAYER_ACCEPT_ATTEMPT_BUTTON-tmp"));
+    PlayerAttemptsGridBox->Add(AttemptResultBoxSizer, 0, wxALL, 5);
     PlayerAttemptsGridBox->Layout();
 
     if(amountOfAttempts < 8) {
@@ -169,7 +189,7 @@ void SoloPlayerUI::generateCurrentAttempt() {
     currentAttemptCtrls.clear();
     for(int i=0; i<level->getAmountOfDigits(); i++){
         std::string cellId = "ID_SINGLE_PLAYER_CURRENT_ATTEMPT_" + i;
-        wxTextCtrl* currentAttemptCell = new wxTextCtrl(this, wxNewId(), _(std::to_string(i + 1)), wxDefaultPosition, wxSize(40, 30), 0, wxDefaultValidator, cellId);
+        wxTextCtrl* currentAttemptCell = new wxTextCtrl(this, wxNewId(), "", wxDefaultPosition, wxSize(40, 30), 0, wxDefaultValidator, cellId);
         //currentAttemptCell->Bind(wxEVT_TEXT, &SoloPlayerUI::OnTextChange, this);
          currentAttemptCell->Bind(wxEVT_TEXT, [currentAttemptCell](wxCommandEvent& event) {
             wxString value = currentAttemptCell->GetValue();
@@ -200,17 +220,17 @@ void SoloPlayerUI::OnAcceptAttemptClick(wxCommandEvent& evt) {
         digits.push_back(value);
     }
 
-    if (game->checkGuess(digits)) {
-        wxMessageBox(_("Brawo! Zgadłeś liczbę!"), _("Sukces"), wxOK | wxICON_INFORMATION);
-    } else {
-        if(digits.size() > 0) {
-            Attempt attempt(digits);
-            this->game->getPlayer1()->addAttempt(attempt);
-            this->generateAttempt(attempt);
+    if(digits.size() > 0) {
+        Attempt attempt(digits, this->game->getSolution());
+        this->game->getPlayer1()->addAttempt(attempt);
+        this->generateAttempt(attempt);
 
-            scrolledWindow->FitInside();
-            scrolledWindow->Layout();
-        }
+        scrolledWindow->FitInside();
+        scrolledWindow->Layout();
+    }
+
+    if (game->checkGuess(digits)) {
+        wxMessageBox(_("Brawo " + this->game->getPlayer1()->getNickname() + "! Zgadłeś liczbę! Potrzebowałeś " + std::to_string(this->game->getPlayer1()->getAttempts().size()) + " prób. Czas wyzwania wynosi: "), _("Sukces"), wxOK | wxICON_INFORMATION);
     }
 }
 
