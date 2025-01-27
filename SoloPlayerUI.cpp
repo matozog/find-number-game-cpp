@@ -122,6 +122,7 @@ std::string joinStrings(const std::vector<std::string>& strings, const std::stri
     std::string result;
     for (size_t i = 0; i < strings.size(); ++i) {
         result += "?";
+        //result += strings[i];
         /*if (i < strings.size() - 1) {
             result += delimiter; // Add the delimiter except after the last element
         }*/

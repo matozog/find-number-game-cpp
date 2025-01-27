@@ -8,11 +8,15 @@ Attempt::Attempt(const std::vector<std::string>& digits, std::vector<std::string
         solutionDigitsFrequency[digit]++;
     }
 
-    for (size_t i = 0; i < solution.size(); ++i) {
+    for (size_t i = 0; i < digits.size(); ++i) {
         if (digits[i] == solution[i]) {
             this->correctDigits++;
             solutionDigitsFrequency[digits[i]]--;
-        } else if(solutionDigitsFrequency[digits[i]] > 0) {
+        }
+    }
+
+    for (size_t i = 0; i < digits.size(); ++i) {
+        if (digits[i] != solution[i] && solutionDigitsFrequency[digits[i]] > 0) {
             this->correctDigitsMisplaced++;
             solutionDigitsFrequency[digits[i]]--;
         }
