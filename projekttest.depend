@@ -2118,19 +2118,21 @@
 
 1736177431 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\msw\rcdefs.h
 
-1737994834 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
+1737998581 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
 	"SoloPlayerUI.h"
 	<wx/wx.h>
 	<wx/intl.h>
 	<wx/string.h>
+	<wx/statline.h>
 
-1737895675 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
+1737995611 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
 	"Game.h"
 	<wx/dialog.h>
 	<wx/sizer.h>
 	<wx/stattext.h>
 	<wx/textctrl.h>
 	<wx/timer.h>
+	<wx/dcclient.h>
 
 1737289162 c:\users\ozogm\documents\cpp\projects\projekttest\game.h
 	"Level.h"
@@ -2796,4 +2798,31 @@
 1737799644 c:\users\ozogm\documents\cpp\projects\projekttest\playerstats.h
 	<string>
 	"Level.h"
+
+1736177426 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\statline.h
+	"wx/defs.h"
+	"wx/control.h"
+	"wx/univ/statline.h"
+	"wx/msw/statline.h"
+	"wx/gtk/statline.h"
+	"wx/gtk1/statline.h"
+	"wx/osx/statline.h"
+	"wx/qt/statline.h"
+	"wx/generic/statline.h"
+
+1736177435 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\univ\statline.h
+
+1736177431 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\msw\statline.h
+
+1736177428 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\gtk\statline.h
+	"wx/defs.h"
+
+1736177429 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\gtk1\statline.h
+	"wx/defs.h"
+
+1736177432 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\osx\statline.h
+
+1736177434 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\qt\statline.h
+
+1736177428 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\generic\statline.h
 

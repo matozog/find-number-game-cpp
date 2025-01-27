@@ -9,6 +9,7 @@
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
 #include <wx/timer.h>
+#include <wx/dcclient.h>
 //*)
 
 #undef _
@@ -72,6 +73,22 @@ class SoloPlayerUI: public wxDialog
         double elapsedTime = 0.0;
 		//(*Handlers(SoloPlayerUI)
 		//*)
+
+        void OnPaint(wxPaintEvent& event) {
+            wxPaintDC dc(this);
+
+            // Get the size of the dialog
+            wxSize size = GetClientSize();
+
+            // Define gradient colors
+            wxColour startColor(0, 128, 0);  // Dark green
+            wxColour endColor(0, 255, 0);    // Bright green
+
+            // Draw the gradient
+            dc.GradientFillLinear(wxRect(0, 0, size.GetWidth(), size.GetHeight()), startColor, endColor, wxSOUTH);
+
+            event.Skip(); // Allow further processing if needed
+        }
 
 		DECLARE_EVENT_TABLE()
 };

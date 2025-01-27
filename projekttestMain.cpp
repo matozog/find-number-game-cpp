@@ -17,6 +17,7 @@
 //(*InternalHeaders(projekttestDialog)
 #include <wx/intl.h>
 #include <wx/string.h>
+#include <wx/statline.h>
 //*)
 
 //helper functions
@@ -75,7 +76,7 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
     wxGridSizer* GridSizer2;
 
     Create(parent, id, _("Znajdź liczbę"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
-    FlexGridSizer1 = new wxFlexGridSizer(7, 1, 0, 0);
+    FlexGridSizer1 = new wxFlexGridSizer(9, 1, 0, 0);
     GridSizer1 = new wxGridSizer(2, 2, 0, 0);
     StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("Poziom trudności"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
     GridSizer1->Add(StaticText2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
@@ -89,6 +90,10 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
     RankingButton = new wxButton(this, ID_RANKING_BUTTON, _("Ranking"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RANKING_BUTTON"));
     GridSizer1->Add(RankingButton, 1, wxALL|wxEXPAND, 5);
     FlexGridSizer1->Add(GridSizer1, 1, wxALL|wxEXPAND, 5);
+
+    wxStaticLine* line1 = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
+    FlexGridSizer1->Add(line1, 1, wxALL|wxEXPAND, 5);
+
     StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _("Wybierz tryb rozgrywki"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
     FlexGridSizer1->Add(StaticText4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
@@ -99,8 +104,12 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
     MultiPlayerCheckbox->SetValue(false);
     BoxSizer1->Add(MultiPlayerCheckbox, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     FlexGridSizer1->Add(BoxSizer1, 1, wxALL|wxEXPAND, 5);
+
+    wxStaticLine* line2 = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
+    FlexGridSizer1->Add(line2, 1, wxALL|wxEXPAND, 5);
+
     StaticText5 = new wxStaticText(this, ID_STATICTEXT5, _("Gracz/e:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
-    FlexGridSizer1->Add(StaticText5, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    FlexGridSizer1->Add(StaticText5, 1, wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     GridSizer2 = new wxGridSizer(2, 2, 0, 0);
     StaticText6 = new wxStaticText(this, ID_STATICTEXT6, _("Gracz1"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
     GridSizer2->Add(StaticText6, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);

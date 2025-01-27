@@ -4,6 +4,7 @@
 //(*InternalHeaders(SoloPlayerUI)
 #include <wx/intl.h>
 #include <wx/string.h>
+#include <wx/statline.h>
 //*)
 
 #undef _
@@ -28,6 +29,9 @@ BEGIN_EVENT_TABLE(SoloPlayerUI,wxDialog)
 	//*)
 END_EVENT_TABLE()
 
+wxColour customGreen(34, 139, 34); // RGB for Forest Green
+wxColour customBlack(0, 0, 0);     // Pure black
+
 SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,const wxSize& size)
 {
 	//(*Initialize(SoloPlayerUI)
@@ -35,8 +39,10 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 	wxGridSizer* GridSizer1;
 
 	Create(parent, wxID_ANY, _("Tryb jednoosobowy"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
-	SinglePlayerContentFlexbox = new wxFlexGridSizer(5, 1, 0, 0);
+	SinglePlayerContentFlexbox = new wxFlexGridSizer(7, 1, 0, 0);
 	GridSizer1 = new wxGridSizer(1, 3, 0, 0);
+
+    //this->SetBackgroundColour(customGreen);
 
 	// Player nickname
 	wxBoxSizer* PlayerNicknameBox = new wxBoxSizer(wxHORIZONTAL);
@@ -62,8 +68,11 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 	GameInfoBox->Add(TextCtrl3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     GridSizer1->Add(GameInfoBox, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 
+    SinglePlayerContentFlexbox->Add(GridSizer1, 1, wxALL|wxEXPAND, 5);
+    wxStaticLine* line1 = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
+	SinglePlayerContentFlexbox->Add(line1, 0, wxALL|wxEXPAND, 5);
+
     // Game board
-	SinglePlayerContentFlexbox->Add(GridSizer1, 1, wxALL|wxEXPAND, 5);
     GameBoard = new wxFlexGridSizer(2, 1, 0, 0);
 	SinglePlayerContentFlexbox->Add(GameBoard, 1, wxALL|wxEXPAND, 5);
 
@@ -84,6 +93,9 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 	BoxSizer1->Add(TimerTextField, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	Timer1.SetOwner(this);
 
+    wxStaticLine* line2 = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
+    SinglePlayerContentFlexbox->Add(line2, 0, wxALL|wxEXPAND, 5);
+
 	SinglePlayerContentFlexbox->Add(BoxSizer1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(SinglePlayerContentFlexbox);
 	Timer1.SetOwner(this, ID_TIMER1);
@@ -99,7 +111,7 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
     GameBoard->Add(scrolledWindow, 1, wxALL|wxEXPAND, 5);
 
     CurrentAttemptGridBox = new wxGridSizer(1, 0, 0, 0);
-    GameBoard->Add(CurrentAttemptGridBox, 1, wxALL|wxEXPAND, 5);
+    GameBoard->Add(CurrentAttemptGridBox, 1, wxALL, 5);
     AcceptAttemptButton = new wxButton(this, wxNewId(), _("Zatwierdź"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_SINGLE_PLAYER_ACCEPT_ATTEMPT_BUTTON"));
 
     scrolledWindow->SetSizer(PlayerAttemptsGridBox);
@@ -116,6 +128,9 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 
     // Timer
     Timer1.Start(100);
+
+    // Bind the paint event to draw the gradient
+    //this->Bind(wxEVT_PAINT, &SoloPlayerUI::OnPaint, this);
 }
 
 std::string joinStrings(const std::vector<std::string>& strings, const std::string& delimiter) {
@@ -150,7 +165,7 @@ void SoloPlayerUI::generateAttempt(Attempt attempt) {
     for(int j=0; j<attempt.getDigits().size(); j++){
         wxString id = wxString::Format("ID_SINGLE_PLAYER_ATTEMPT_%d", j);
         wxTextCtrl* attemptCell = new wxTextCtrl(scrolledWindow, wxNewId(), _(attempt.getDigits().at(j)), wxDefaultPosition, wxSize(40, 30), wxTE_READONLY, wxDefaultValidator, id);
-        PlayerAttemptsGridBox->Add(attemptCell, 1, wxALL, 5);
+        PlayerAttemptsGridBox->Add(attemptCell, 1, wxALL|wxCENTER, 0);
     }
 
     wxBoxSizer* AttemptResultBoxSizer = new wxBoxSizer(wxHORIZONTAL);
@@ -174,11 +189,11 @@ void SoloPlayerUI::generateAttempt(Attempt attempt) {
     }
 
     //wxButton* ButtonTmp = new wxButton(scrolledWindow, wxNewId(), _("Tmp"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_SINGLE_PLAYER_ACCEPT_ATTEMPT_BUTTON-tmp"));
-    PlayerAttemptsGridBox->Add(AttemptResultBoxSizer, 0, wxALL, 5);
+    PlayerAttemptsGridBox->Add(AttemptResultBoxSizer, 0, wxALL|wxEXPAND, 5);
     PlayerAttemptsGridBox->Layout();
 
     if(amountOfAttempts < 8) {
-        scrolledWindow->SetMinSize(wxSize(-1, amountOfAttempts*40));
+        scrolledWindow->SetMinSize(wxSize(-1, amountOfAttempts*50));
     }
     scrolledWindow->SetSizer(PlayerAttemptsGridBox);
     scrolledWindow->Layout();
@@ -212,9 +227,9 @@ void SoloPlayerUI::generateCurrentAttempt() {
         });
 
         currentAttemptCtrls.push_back(currentAttemptCell);
-        CurrentAttemptGridBox->Add(currentAttemptCell, 1, wxALL, 5);
+        CurrentAttemptGridBox->Add(currentAttemptCell, 0, wxALL, 2);
     }
-    CurrentAttemptGridBox->Add(AcceptAttemptButton, 0, wxALL, 5);
+    CurrentAttemptGridBox->Add(AcceptAttemptButton, 0, wxALL|wxEXPAND, 5);
     this->UpdateAcceptButtonState();
 
     CurrentAttemptGridBox->Layout();
