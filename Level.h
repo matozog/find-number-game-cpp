@@ -21,6 +21,7 @@ private:
 public:
     Level(const std::string type);
     int getAmountOfDigits();
+    LevelType getLevelType();
     std::string getLevelTypeText();
     std::vector<std::string> generateRandomNumber(); // Nowa metoda
 };

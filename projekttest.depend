@@ -2126,7 +2126,7 @@
 	<wx/string.h>
 	<wx/statline.h>
 
-1738412857 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
+1738447189 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
 	"Game.h"
 	<wx/dialog.h>
 	<wx/sizer.h>
@@ -2140,7 +2140,7 @@
 	"Player.h"
 	<string>
 
-1737289782 c:\users\ozogm\documents\cpp\projects\projekttest\level.h
+1738446643 c:\users\ozogm\documents\cpp\projects\projekttest\level.h
 	<string>
 	<vector>
 	<cstdlib>
@@ -2161,7 +2161,7 @@
 1737286391 source:c:\users\ozogm\documents\cpp\projects\projekttest\player.cpp
 	"Player.h"
 
-1737289707 source:c:\users\ozogm\documents\cpp\projects\projekttest\level.cpp
+1738446665 source:c:\users\ozogm\documents\cpp\projects\projekttest\level.cpp
 	"Level.h"
 
 1737289087 source:c:\users\ozogm\documents\cpp\projects\projekttest\game.cpp

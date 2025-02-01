@@ -31,6 +31,10 @@ std::string Level::getLevelTypeText(){
     }
 }
 
+LevelType Level::getLevelType(){
+    return this->type;
+}
+
 std::vector<std::string> Level::generateRandomNumber() {
     std::vector<std::string> randomNumber;
 

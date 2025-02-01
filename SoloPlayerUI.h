@@ -27,7 +27,7 @@ class SoloPlayerUI: public wxDialog
 
         wxFlexGridSizer* GameBoard;
         wxGridSizer* PlayerAttemptsGridBox;
-        wxGridSizer* CurrentAttemptGridBox;
+        wxBoxSizer* CurrentAttemptGridBox;
         wxGridSizer* GameInfoBox;
         wxFlexGridSizer* SinglePlayerContentFlexbox;
         wxScrolledWindow* scrolledWindow;
@@ -73,6 +73,7 @@ class SoloPlayerUI: public wxDialog
         std::vector<wxTextCtrl*> currentAttemptCtrls;
         void OnCloseGame(wxCloseEvent& event);
         double elapsedTime = 0.0;
+        int gameBoardWidth = 0;
 
 		//(*Handlers(SoloPlayerUI)
 		//*)
