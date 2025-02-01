@@ -2069,7 +2069,7 @@
 1736177434 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\qt\tglbtn.h
 	"wx/tglbtn.h"
 
-1737806932 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
+1737998895 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
 	"projekttestMain.h"
 	<wx/msgdlg.h>
 	<wx/wx.h>
@@ -2078,6 +2078,7 @@
 	<sstream>
 	<wx/intl.h>
 	<wx/string.h>
+	<wx/statline.h>
 
 1736177425 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\msgdlg.h
 	"wx/defs.h"
@@ -2118,14 +2119,14 @@
 
 1736177431 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\msw\rcdefs.h
 
-1737998581 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
+1738414984 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
 	"SoloPlayerUI.h"
 	<wx/wx.h>
 	<wx/intl.h>
 	<wx/string.h>
 	<wx/statline.h>
 
-1737995611 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
+1738412857 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
 	"Game.h"
 	<wx/dialog.h>
 	<wx/sizer.h>

@@ -22,11 +22,13 @@ class SoloPlayerUI: public wxDialog
 		void createGameBoard(Game* game);
 		void generateAttempt(Attempt attempt);
 		void generateCurrentAttempt();
+		void generateNumberInfo(int amountOfDigits);
 		virtual ~SoloPlayerUI();
 
         wxFlexGridSizer* GameBoard;
         wxGridSizer* PlayerAttemptsGridBox;
         wxGridSizer* CurrentAttemptGridBox;
+        wxGridSizer* GameInfoBox;
         wxFlexGridSizer* SinglePlayerContentFlexbox;
         wxScrolledWindow* scrolledWindow;
         wxButton* AcceptAttemptButton;
@@ -71,6 +73,7 @@ class SoloPlayerUI: public wxDialog
         std::vector<wxTextCtrl*> currentAttemptCtrls;
         void OnCloseGame(wxCloseEvent& event);
         double elapsedTime = 0.0;
+
 		//(*Handlers(SoloPlayerUI)
 		//*)
 
