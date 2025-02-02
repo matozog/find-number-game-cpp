@@ -44,6 +44,7 @@ class RankingDialog: public wxDialog
 
 	private:
 	    wxGrid* statsGrid;
+        wxFlexGridSizer* FlexGridSizer1;
         std::vector<PlayerStats> playersStats;
         std::vector<PlayerStats> filteredStats;
         void recalculateGridData();

@@ -52,6 +52,7 @@ const long projekttestDialog::ID_STATICTEXT2 = wxNewId();
 const long projekttestDialog::ID_STATICTEXT1 = wxNewId();
 const long projekttestDialog::ID_LEVEL_CHOICE = wxNewId();
 const long projekttestDialog::ID_RANKING_BUTTON = wxNewId();
+const long projekttestDialog::ID_GAME_INFO_BUTTON = wxNewId();
 const long projekttestDialog::ID_STATICTEXT4 = wxNewId();
 const long projekttestDialog::ID_SINGLE_PLAYER_CHECKBOX = wxNewId();
 const long projekttestDialog::ID_MULTI_PLAYER_CHECKBOX = wxNewId();
@@ -94,10 +95,12 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
     StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Ranking graczy"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
     GridSizer1->Add(StaticText1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 
-    wxButton* InfoButton = new wxButton(this, ID_RANKING_BUTTON, _("Instrukcja"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_GAME_INFO_BUTTON"));
+    wxButton* InfoButton = new wxButton(this, ID_GAME_INFO_BUTTON, _("Instrukcja"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_GAME_INFO_BUTTON"));
     GridSizer1->Add(InfoButton, 1, wxRIGHT|wxBOTTOM|wxTOP|wxEXPAND, 5);
 
     RankingButton = new wxButton(this, ID_RANKING_BUTTON, _("Ranking"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_RANKING_BUTTON"));
+    RankingButton->SetBackgroundColour(wxColour(38, 38, 38));
+    RankingButton->SetForegroundColour(wxColour(255, 255, 255));
     GridSizer1->Add(RankingButton, 1, wxLEFT|wxTOP|wxBOTTOM|wxEXPAND, 5);
 
     FlexGridSizer1->Add(GridSizer1, 1, wxALL|wxEXPAND, 15);
@@ -152,6 +155,12 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
     RankingButton->SetFont(buttonFont);
     PlayButton->SetFont(buttonFont);
 
+    InfoButton->SetBackgroundColour(wxColour(38, 38, 38));
+    InfoButton->SetForegroundColour(wxColour(255, 255, 255));
+
+    PlayButton->SetBackgroundColour(wxColour(38, 38, 38));
+    PlayButton->SetForegroundColour(wxColour(255, 255, 255));
+
     Player1TextField->SetFont(buttonFont);
     LevelChoice->SetFont(buttonFont);
 
@@ -159,10 +168,13 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
 
     PlayButton->Bind(wxEVT_BUTTON, &projekttestDialog::OnPlayButtonClick, this);
     RankingButton->Bind(wxEVT_BUTTON, &projekttestDialog::OnShowRanking, this);
-    //SinglePlayerCheckbox->Bind(wxEVT_CHECKBOX, &projekttestDialog::OnSinglePlayerCheck, this);
-    //MultiPlayerCheckbox->Bind(wxEVT_CHECKBOX, &projekttestDialog::OnMultiPlayerCheck, this);
+    InfoButton->Bind(wxEVT_BUTTON, &projekttestDialog::OnInfoClick, this);
 
     rankingDialog = new RankingDialog(parent, 3, wxDefaultPosition, wxDefaultSize, this->playersStats);
+}
+
+void projekttestDialog::OnInfoClick(wxCommandEvent& event){
+
 }
 
 void projekttestDialog::OnPlayButtonClick(wxCommandEvent& event)

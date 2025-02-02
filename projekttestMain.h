@@ -52,6 +52,7 @@ class projekttestDialog: public wxDialog
         void OnSinglePlayerCheck(wxCommandEvent& event);
         void OnMultiPlayerCheck(wxCommandEvent& event);
         void OnShowRanking(wxCommandEvent& event);
+        void OnInfoClick(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(projekttestDialog)

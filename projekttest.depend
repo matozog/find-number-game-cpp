@@ -1768,7 +1768,7 @@
 1736177435 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\univ\theme.h
 	"wx/string.h"
 
-1738452696 c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.h
+1738497033 c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.h
 	"MultiPlayerUI.h"
 	"SoloPlayerUI.h"
 	"Game.h"
@@ -2069,7 +2069,7 @@
 1736177434 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\qt\tglbtn.h
 	"wx/tglbtn.h"
 
-1738455157 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
+1738497979 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
 	"projekttestMain.h"
 	<wx/msgdlg.h>
 	<wx/wx.h>
@@ -2120,7 +2120,7 @@
 
 1736177431 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\msw\rcdefs.h
 
-1738450993 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
+1738456610 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
 	"SoloPlayerUI.h"
 	<wx/wx.h>
 	<wx/intl.h>
@@ -2782,7 +2782,7 @@
 1737571238 c:\users\ozogm\documents\cpp\projects\projekttest\rankingwindow.h
 	<wx/wx.h>
 
-1737803646 c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.h
+1738496066 c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.h
 	<vector>
 	"PlayerStats.h"
 	<wx/choice.h>
@@ -2791,7 +2791,7 @@
 	<wx/sizer.h>
 	<wx/stattext.h>
 
-1738451115 source:c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.cpp
+1738496863 source:c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.cpp
 	"RankingDialog.h"
 	<wx/intl.h>
 	<wx/string.h>
