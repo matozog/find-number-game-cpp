@@ -29,8 +29,9 @@ BEGIN_EVENT_TABLE(SoloPlayerUI,wxDialog)
 	//*)
 END_EVENT_TABLE()
 
-wxColour customGreen(34, 139, 34); // RGB for Forest Green
-wxColour customBlack(0, 0, 0);     // Pure black
+wxColour customGreen(0, 204, 102); // RGB for Forest Green
+wxColour customBlack(38, 38, 38);     // Pure black
+wxColour evenRow(204, 255, 230);
 wxFont currentAttemptInputFont(15, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 wxFont inputFont(14, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 wxFont labelFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
@@ -40,7 +41,7 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
     //wxBitmap questionTagBitMap("assets/question-tag.png", wxBITMAP_TYPE_PNG);
 
 	//(*Initialize(SoloPlayerUI)
-	wxBoxSizer* BoxSizer1;
+	wxFlexGridSizer* BoxSizer1;
 	wxBoxSizer* GridSizer1;
 
 	Create(parent, wxID_ANY, _("Tryb jednoosobowy"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
@@ -88,26 +89,34 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
     GameBoard = new wxFlexGridSizer(2, 1, 0, 0);
 	SinglePlayerContentFlexbox->Add(GameBoard, 1, wxALL, 5);
 
-	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer1 = new wxFlexGridSizer(1, 3, 0, 0);
+	BoxSizer1->AddGrowableCol(1);
 
 	// Amount of attempts
+	wxBoxSizer* AmountOfAttemptsBox = new wxBoxSizer(wxHORIZONTAL);
     StaticText6 = new wxStaticText(this, ID_STATICTEXT6, _("Ilość prób:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
     StaticText6->SetFont(labelFont);
-	BoxSizer1->Add(StaticText6, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	AmountOfAttemptsBox->Add(StaticText6, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5);
 	AttemptsTextField = new wxTextCtrl(this, ID_ATTEMPTS_TEXT_FIELD, _("0"), wxDefaultPosition, wxSize(60, 30), wxTE_READONLY|wxTE_CENTER, wxDefaultValidator, _T("ID_ATTEMPTS_TEXT_FIELD"));
 	AttemptsTextField->SetFont(inputFont);
-	BoxSizer1->Add(AttemptsTextField, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	AmountOfAttemptsBox->Add(AttemptsTextField, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5);
 
-	BoxSizer1->AddStretchSpacer(1); // Add stretchable space
+    BoxSizer1->Add(AmountOfAttemptsBox, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+
+	//BoxSizer1->AddStretchSpacer(); // Add stretchable space
+	BoxSizer1->AddSpacer(1);
 
 	// Timer
+	wxBoxSizer* TimerBox = new wxBoxSizer(wxHORIZONTAL);
 	StaticText5 = new wxStaticText(this, ID_STATICTEXT5, _("Czas:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
 	StaticText5->SetFont(labelFont);
-	BoxSizer1->Add(StaticText5, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	TimerBox->Add(StaticText5, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
 	TimerTextField = new wxTextCtrl(this, ID_TIMER_TEXT_FIELD, _("0"), wxDefaultPosition, wxSize(100, 30), wxTE_READONLY|wxTE_CENTER, wxDefaultValidator, _T("ID_TIMER_TEXT_FIELD"));
 	TimerTextField->SetFont(inputFont);
-	BoxSizer1->Add(TimerTextField, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	TimerBox->Add(TimerTextField, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5);
 	Timer1.SetOwner(this);
+
+    BoxSizer1->Add(TimerBox, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
 
     wxStaticLine* line2 = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
     SinglePlayerContentFlexbox->Add(line2, 0, wxALL|wxEXPAND, 5);
@@ -129,6 +138,10 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
     GameBoard->Add(CurrentAttemptGridBox, 1, wxALL, 10);
     AcceptAttemptButton = new wxButton(this, wxNewId(), _("Zatwierdź"), wxDefaultPosition, wxSize(120, 35), 0, wxDefaultValidator, _T("ID_SINGLE_PLAYER_ACCEPT_ATTEMPT_BUTTON"));
     AcceptAttemptButton->SetFont(labelFont);
+    AcceptAttemptButton->SetBackgroundColour(customBlack);
+    AcceptAttemptButton->SetForegroundColour(wxColour(255, 255, 255));
+
+    AcceptAttemptButton->Bind(wxEVT_ENTER_WINDOW, &SoloPlayerUI::OnMouseEnterAcceptButton, this);
 
     scrolledWindow->SetSizer(PlayerAttemptsGridBox);
     PlayerAttemptsGridBox->SetSizeHints(scrolledWindow);
@@ -149,6 +162,15 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
     //this->Bind(wxEVT_PAINT, &SoloPlayerUI::OnPaint, this);
 }
 
+void SoloPlayerUI::OnMouseEnterAcceptButton(wxMouseEvent& event){
+    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+    if (button) {
+        button->SetBackgroundColour(customBlack);  // Light blue on hover
+        button->Refresh();
+    }
+    event.Skip();
+}
+
 std::string joinStrings(const std::vector<std::string>& strings, const std::string& delimiter) {
     std::string result;
     for (size_t i = 0; i < strings.size(); ++i) {
@@ -162,10 +184,10 @@ std::string joinStrings(const std::vector<std::string>& strings, const std::stri
 }
 
 void SoloPlayerUI::createGameBoard(Game* game){
-    int gameBoardWidth = 560;
+    int gameBoardWidth = 550;
     int amountOfVisibleAttempts = 8;
     if(game->getLevel()->getLevelType() == LevelType::MEDIUM) {
-        gameBoardWidth = 660;
+        gameBoardWidth = 650;
     } else if (game->getLevel()->getLevelType() == LevelType::HARD){
         gameBoardWidth = 780;
     }
@@ -239,6 +261,11 @@ void SoloPlayerUI::generateAttempt(Attempt attempt) {
     }
 
     AttemptTextFieldsBox->AddSpacer(15);
+
+    //if(amountOfAttempts%2 == 0){
+    //    AttemptResultBoxSizer->SetBackgroundColour(evenRow);
+    //    AttemptTextFieldsBox->SetBackgroundColour(evenRow);
+    //}
 
     //wxButton* ButtonTmp = new wxButton(scrolledWindow, wxNewId(), _("Tmp"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_SINGLE_PLAYER_ACCEPT_ATTEMPT_BUTTON-tmp"));
     PlayerAttemptsGridBox->Add(AttemptTextFieldsBox, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);

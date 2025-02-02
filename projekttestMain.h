@@ -59,6 +59,7 @@ class projekttestDialog: public wxDialog
         static const long ID_STATICTEXT1;
         static const long ID_LEVEL_CHOICE;
         static const long ID_RANKING_BUTTON;
+        static const long ID_GAME_INFO_BUTTON;
         static const long ID_STATICTEXT4;
         static const long ID_SINGLE_PLAYER_CHECKBOX;
         static const long ID_MULTI_PLAYER_CHECKBOX;
@@ -73,8 +74,8 @@ class projekttestDialog: public wxDialog
         //(*Declarations(projekttestDialog)
         wxButton* PlayButton;
         wxButton* RankingButton;
-        wxCheckBox* MultiPlayerCheckbox;
-        wxCheckBox* SinglePlayerCheckbox;
+        //wxCheckBox* MultiPlayerCheckbox;
+        //wxCheckBox* SinglePlayerCheckbox;
         wxChoice* LevelChoice;
         wxFileDialog* FileDialog1;
         wxStaticText* StaticText1;

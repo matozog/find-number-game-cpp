@@ -22,16 +22,21 @@ BEGIN_EVENT_TABLE(RankingDialog,wxDialog)
 	//*)
 END_EVENT_TABLE()
 
+
 RankingDialog::RankingDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size, const std::vector<PlayerStats>& stats)
 {
     this->playersStats = stats;
     int totalHeight = 30 * this->playersStats.size();
+    wxColour customGreen(0, 204, 102); // RGB for Forest Green
 
 	//(*Initialize(RankingDialog)
 	wxFlexGridSizer* FlexGridSizer1;
 	wxGridSizer* GridSizer1;
 
 	Create(parent, id, _("Ranking graczy"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
+
+    this->SetBackgroundColour(customGreen);
+
 	SetClientSize(wxDefaultSize);
 	Move(wxDefaultPosition);
 	FlexGridSizer1 = new wxFlexGridSizer(3, 1, 0, 0);

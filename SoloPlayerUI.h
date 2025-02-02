@@ -37,6 +37,7 @@ class SoloPlayerUI: public wxDialog
         void OnTextChange(wxCommandEvent& evt);
         void OnTimerTick(wxTimerEvent& event);
         void UpdateAcceptButtonState();
+        void OnMouseEnterAcceptButton(wxMouseEvent& event);
 
 		//(*Declarations(SoloPlayerUI)
 		wxStaticText* StaticText2;
