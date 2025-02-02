@@ -19,6 +19,7 @@
 #include <wx/string.h>
 #include <wx/statline.h>
 #include <wx/dcclient.h>
+#include <wx/utils.h>
 //*)
 
 //helper functions
@@ -174,7 +175,14 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
 }
 
 void projekttestDialog::OnInfoClick(wxCommandEvent& event){
+    // Specify the path to the PDF file
+    wxString pdfPath = wxT("./assets/game-info.pdf");
 
+    // Launch the default application for opening PDFs
+    if (!wxLaunchDefaultApplication("/game-info.pdf"))
+    {
+        wxMessageBox(_("Nie można otworzyć pliku instrukcji gry."), _("Bląd wczytywania"), wxOK | wxICON_ERROR);
+    }
 }
 
 void projekttestDialog::OnPlayButtonClick(wxCommandEvent& event)
