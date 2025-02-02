@@ -21,6 +21,8 @@ public:
     const std::string& getLevel() const { return level; }
     int getAttempts() const { return amountOfAttempts; }
     double getTime() const { return time; }
+    void setTime(double time) { this->time = time; }
+    void setAmountOfAttempts(int amountOfAttempts) { this->amountOfAttempts = amountOfAttempts; }
 };
 
 

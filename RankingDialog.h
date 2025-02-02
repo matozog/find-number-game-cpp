@@ -16,12 +16,14 @@ class RankingDialog: public wxDialog
 {
 	public:
 
-		RankingDialog(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize, const std::vector<PlayerStats>& playersStats = std::vector<PlayerStats>());
+        RankingDialog(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize, const std::vector<PlayerStats>& playersStats = std::vector<PlayerStats>());
 		void OnChangeLevel(wxCommandEvent& evt);
 		void OnChangeOption(wxCommandEvent& evt);
 		void FilterGridDataByLevel();
 		void SortStatsByAttempts();
 		void SortStatsByTIme();
+        void recalculateGridData();
+        //void SetPlayersStats(std::vector<PlayerStats>& stats) { this->playersStats = &stats; };
 		virtual ~RankingDialog();
 
 		//(*Declarations(RankingDialog)
@@ -45,9 +47,8 @@ class RankingDialog: public wxDialog
 	private:
 	    wxGrid* statsGrid;
         wxFlexGridSizer* FlexGridSizer1;
-        std::vector<PlayerStats> playersStats;
+        const std::vector<PlayerStats> &playersStats;
         std::vector<PlayerStats> filteredStats;
-        void recalculateGridData();
 		//(*Handlers(RankingDialog)
 		//*)
 

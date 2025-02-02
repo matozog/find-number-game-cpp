@@ -1,17 +1,16 @@
 #include "Game.h"
+#include <algorithm>
+#include <wx/msgdlg.h>
+#include <iostream>
+#include <vector>
+#include <fstream>
 
-Game::Game(Level* level, const std::string& type, Player* player1){
+/*Game::Game(Level* level, Player* player1, const std::vector<PlayerStats>& playerStats){
     this->level = level;
     this->type = type;
     this->player1 = player1;
-}
-
-Game::Game(Level* level, const std::string& type, Player* player1, Player* player2){
-    this->level = level;
-    this->type = type;
-    this->player1 = player1;
-    this->player2 = player2;
-}
+    this->playersStats = playerStats;
+}*/
 
 Level* Game::getLevel() {
     return this->level;
@@ -45,4 +44,59 @@ void Game::setSolution(const std::vector<std::string>& solution) {
 
 std::vector<std::string> Game::getSolution() const {
     return solution;
+}
+
+
+void Game::savePlayerStats(){
+    bool rewriteRanking = false;
+    auto currentStats = std::find_if(playersStats.begin(), playersStats.end(), [this](const PlayerStats& p) {
+        return p.getNick() == player1->getNickname() && p.getLevel() == level->getLevelTypeText();
+    });
+
+    if (currentStats != playersStats.end()) {
+        if(areNewPlayerStatsBetter(currentStats)){
+            currentStats->setTime(this->player1->getChallengeTime());
+            currentStats->setAmountOfAttempts(this->player1->getAttempts().size());
+            rewriteRanking = true;
+        }
+    } else {
+        PlayerStats newStat(this->player1->getNickname(), this->level->getLevelTypeText(), this->player1->getAttempts().size(), this->player1->getChallengeTime());
+        this->playersStats.emplace_back(newStat);
+        rewriteRanking = true;
+    }
+
+    if(rewriteRanking){
+        savePlayersStatsToCSVFile();
+        wxMessageBox("Rewrite ranking", _("Bląd wczytywania"), wxOK | wxICON_ERROR);
+    }
+}
+
+bool Game::areNewPlayerStatsBetter(auto& currentStats) {
+    if(this->player1->getAttempts().size() < currentStats->getAttempts()){
+        return true;
+    } else if (this->player1->getAttempts().size() == currentStats->getAttempts()) {
+        return this->player1->getChallengeTime() < currentStats->getTime();
+    }
+
+    return false;
+}
+
+void Game::savePlayersStatsToCSVFile(){
+    std::ofstream file("ranking.csv");
+
+    // Check if the file opened successfully
+    if (!file.is_open()) {
+        wxMessageBox("Błąd otwierania pliku ranking csv", _("Bląd wczytywania"), wxOK | wxICON_ERROR);
+        return;
+    }
+
+    // Write player stats
+    for (const auto& player : playersStats) {
+        file << player.getNick() << ","
+             << player.getLevel() << ","
+             << player.getAttempts() << ","
+             << player.getTime() << "\n";
+    }
+
+    file.close();  // Close file
 }

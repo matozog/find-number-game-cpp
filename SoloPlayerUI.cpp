@@ -347,6 +347,8 @@ void SoloPlayerUI::OnAcceptAttemptClick(wxCommandEvent& evt) {
 
     if (game->checkGuess(digits)) {
         Timer1.Stop();
+        this->game->getPlayer1()->setChallengeTime(elapsedTime);
+        this->game->savePlayerStats();
         wxMessageBox(_("Brawo " + this->game->getPlayer1()->getNickname() + "! Zgadłeś liczbę! Potrzebowałeś "
                        + std::to_string(this->game->getPlayer1()->getAttempts().size()) + " prób. Czas wyzwania wynosi: "
                        + wxString::Format("%.1f s", elapsedTime)), _("Sukces"), wxOK | wxICON_INFORMATION);

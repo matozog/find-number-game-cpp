@@ -23,9 +23,9 @@ BEGIN_EVENT_TABLE(RankingDialog,wxDialog)
 END_EVENT_TABLE()
 
 
-RankingDialog::RankingDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size, const std::vector<PlayerStats>& stats)
+RankingDialog::RankingDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size, const std::vector<PlayerStats>& stats): playersStats(stats)
 {
-    this->playersStats = stats;
+    //this->playersStats = stats;
     int totalHeight = 35 + this->playersStats.size() * 25;
     if(this->playersStats.size() > 8) {
         totalHeight = 35  + 25 * 8;

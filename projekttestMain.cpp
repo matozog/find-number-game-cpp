@@ -193,30 +193,12 @@ void projekttestDialog::OnPlayButtonClick(wxCommandEvent& event)
     singlePlayerDialog->ShowModal();
 }
 
-/*void projekttestDialog::OnSinglePlayerCheck(wxCommandEvent& event){
-    if(MultiPlayerCheckbox->IsChecked()){
-        MultiPlayerCheckbox->SetValue(false);
-    }
-    if(!SinglePlayerCheckbox->IsChecked()){
-        SinglePlayerCheckbox->SetValue(true);
-    }
-}
-
-void projekttestDialog::OnMultiPlayerCheck(wxCommandEvent& event){
-    if(SinglePlayerCheckbox->IsChecked()){
-        SinglePlayerCheckbox->SetValue(false);
-    }
-    if(!MultiPlayerCheckbox->IsChecked()){
-        MultiPlayerCheckbox->SetValue(true);
-    }
-}
-*/
 void projekttestDialog::createGame() {
     Level* level = new Level(LevelChoice->GetStringSelection().ToUTF8().data());
 
     //std::string gameType = SinglePlayerCheckbox->IsChecked() ? "single" : "multi";
     Player* player1 = new Player(Player1TextField->GetValue().ToStdString());
-    this->game = new Game(level, "single", player1);
+    this->game = new Game(level, player1, this->playersStats);
 
     std::vector<std::string> randomNumber = level->generateRandomNumber();
     this->game->setSolution(randomNumber);
@@ -253,6 +235,8 @@ void projekttestDialog::loadPlayersRanking() {
 }
 
 void projekttestDialog::OnShowRanking(wxCommandEvent& event){
+    //this->rankingDialog->SetPlayersStats(this->game->getPlayerStats());
+    this->rankingDialog->recalculateGridData();
     this->rankingDialog->ShowModal();
 }
 

@@ -49,8 +49,6 @@ class projekttestDialog: public wxDialog
 
         //(*Handlers(projekttestDialog)
         void OnPlayButtonClick(wxCommandEvent& event);
-        void OnSinglePlayerCheck(wxCommandEvent& event);
-        void OnMultiPlayerCheck(wxCommandEvent& event);
         void OnShowRanking(wxCommandEvent& event);
         void OnInfoClick(wxCommandEvent& event);
         //*)

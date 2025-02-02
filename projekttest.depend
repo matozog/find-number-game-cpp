@@ -1768,7 +1768,7 @@
 1736177435 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\univ\theme.h
 	"wx/string.h"
 
-1738497033 c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.h
+1738528908 c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.h
 	"MultiPlayerUI.h"
 	"SoloPlayerUI.h"
 	"Game.h"
@@ -2069,7 +2069,7 @@
 1736177434 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\qt\tglbtn.h
 	"wx/tglbtn.h"
 
-1738498212 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
+1738535636 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
 	"projekttestMain.h"
 	<wx/msgdlg.h>
 	<wx/wx.h>
@@ -2080,6 +2080,7 @@
 	<wx/string.h>
 	<wx/statline.h>
 	<wx/dcclient.h>
+	<wx/utils.h>
 
 1736177425 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\msgdlg.h
 	"wx/defs.h"
@@ -2120,7 +2121,7 @@
 
 1736177431 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\msw\rcdefs.h
 
-1738456610 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
+1738529678 source:c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.cpp
 	"SoloPlayerUI.h"
 	<wx/wx.h>
 	<wx/intl.h>
@@ -2136,9 +2137,10 @@
 	<wx/timer.h>
 	<wx/dcclient.h>
 
-1737289162 c:\users\ozogm\documents\cpp\projects\projekttest\game.h
+1738536780 c:\users\ozogm\documents\cpp\projects\projekttest\game.h
 	"Level.h"
 	"Player.h"
+	"PlayerStats.h"
 	<string>
 
 1738446643 c:\users\ozogm\documents\cpp\projects\projekttest\level.h
@@ -2147,7 +2149,7 @@
 	<cstdlib>
 	<ctime>
 
-1737286422 c:\users\ozogm\documents\cpp\projects\projekttest\player.h
+1738530829 c:\users\ozogm\documents\cpp\projects\projekttest\player.h
 	"Attempt.h"
 	<string>
 
@@ -2159,14 +2161,19 @@
 	"Attempt.h"
 	<unordered_map>
 
-1737286391 source:c:\users\ozogm\documents\cpp\projects\projekttest\player.cpp
+1738528924 source:c:\users\ozogm\documents\cpp\projects\projekttest\player.cpp
 	"Player.h"
 
 1738446665 source:c:\users\ozogm\documents\cpp\projects\projekttest\level.cpp
 	"Level.h"
 
-1737289087 source:c:\users\ozogm\documents\cpp\projects\projekttest\game.cpp
+1738533916 source:c:\users\ozogm\documents\cpp\projects\projekttest\game.cpp
 	"Game.h"
+	<algorithm>
+	<wx/msgdlg.h>
+	<iostream>
+	<vector>
+	<fstream>
 
 1736177427 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\wx.h
 	"wx/defs.h"
@@ -2782,7 +2789,7 @@
 1737571238 c:\users\ozogm\documents\cpp\projects\projekttest\rankingwindow.h
 	<wx/wx.h>
 
-1738496066 c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.h
+1738537234 c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.h
 	<vector>
 	"PlayerStats.h"
 	<wx/choice.h>
@@ -2791,13 +2798,13 @@
 	<wx/sizer.h>
 	<wx/stattext.h>
 
-1738496863 source:c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.cpp
+1738537092 source:c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.cpp
 	"RankingDialog.h"
 	<wx/intl.h>
 	<wx/string.h>
 	<wx/msgdlg.h>
 
-1737799644 c:\users\ozogm\documents\cpp\projects\projekttest\playerstats.h
+1738531868 c:\users\ozogm\documents\cpp\projects\projekttest\playerstats.h
 	<string>
 	"Level.h"
 

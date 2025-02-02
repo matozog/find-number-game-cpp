@@ -15,3 +15,7 @@ void Player::addAttempt(Attempt attempt) {
 std::string Player::getNickname(){
     return this->nickname;
 }
+
+void Player::setChallengeTime(double challengeTime){
+    this->challengeTime = challengeTime;
+}
