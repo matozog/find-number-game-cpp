@@ -34,7 +34,6 @@ class SoloPlayerUI: public wxDialog
         wxButton* AcceptAttemptButton;
 
         void OnAcceptAttemptClick(wxCommandEvent& evt);
-        void OnTextChange(wxCommandEvent& evt);
         void OnTimerTick(wxTimerEvent& event);
         void UpdateAcceptButtonState();
         void OnMouseEnterAcceptButton(wxMouseEvent& event);

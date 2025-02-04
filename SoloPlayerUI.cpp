@@ -75,10 +75,6 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 	StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _("Szukana liczba"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
 	StaticText4->SetFont(labelFont);
 	GameInfoBox->Add(StaticText4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	//TextCtrl3 = new wxTextCtrl(this, ID_TEXTCTRL3, _("Text"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL3"));
-	//GameInfoBox->Add(TextCtrl3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    //wxStaticBitmap* questionIcon = new wxStaticBitmap(this, wxID_ANY, questionTagBitMap, wxPoint(25, 25));
-    //GameInfoBox->Add(questionIcon, 0, wxALL, 5);
     GridSizer1->Add(GameInfoBox, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 
     SinglePlayerContentFlexbox->Add(GridSizer1, 1, wxALL|wxEXPAND, 5);
@@ -103,7 +99,6 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 
     BoxSizer1->Add(AmountOfAttemptsBox, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
 
-	//BoxSizer1->AddStretchSpacer(); // Add stretchable space
 	BoxSizer1->AddSpacer(1);
 
 	// Timer
@@ -197,11 +192,10 @@ void SoloPlayerUI::createGameBoard(Game* game){
     scrolledWindow->SetMinSize(wxSize(gameBoardWidth, 0));
     PlayerNicknameTextField->SetValue(game->getPlayer1()->getNickname());
     TextCtrl2->SetValue(_(game->getLevel()->getLevelTypeText()));
-    //TextCtrl3->SetValue(joinStrings(game->getSolution(), ""));
+
     this->generateNumberInfo(game->getLevel()->getAmountOfDigits());
     this->generateCurrentAttempt();
     SinglePlayerContentFlexbox->Layout();
-    //wxMessageBox(std::to_string(CurrentAttemptGridBox->GetSize().GetWidth()), _("Sukces"), wxOK | wxICON_INFORMATION);
 }
 
 void SoloPlayerUI::generateNumberInfo(int amountOfDigits) {
@@ -253,7 +247,6 @@ void SoloPlayerUI::generateAttempt(Attempt attempt) {
         AttemptResultBoxSizer->Add(checkMarkIcon, 0, wxRIGHT, 20);
     }
 
-    //wxMessageBox(std::to_string(attempt.getCorrectDigitsMisplaced()), _("Sukces"), wxOK | wxICON_INFORMATION);
     for(int i = 0; i<attempt.getCorrectDigitsMisplaced(); i++) {
         // Display the image in the panel
         wxStaticBitmap* circleIcon = new wxStaticBitmap(scrolledWindow, wxID_ANY, circleBitMap, wxPoint(30, 30));
@@ -262,12 +255,6 @@ void SoloPlayerUI::generateAttempt(Attempt attempt) {
 
     AttemptTextFieldsBox->AddSpacer(15);
 
-    //if(amountOfAttempts%2 == 0){
-    //    AttemptResultBoxSizer->SetBackgroundColour(evenRow);
-    //    AttemptTextFieldsBox->SetBackgroundColour(evenRow);
-    //}
-
-    //wxButton* ButtonTmp = new wxButton(scrolledWindow, wxNewId(), _("Tmp"), wxDefaultPosition, wxSize(100, 30), 0, wxDefaultValidator, _T("ID_SINGLE_PLAYER_ACCEPT_ATTEMPT_BUTTON-tmp"));
     PlayerAttemptsGridBox->Add(AttemptTextFieldsBox, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
     PlayerAttemptsGridBox->Add(AttemptResultBoxSizer, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
     PlayerAttemptsGridBox->Layout();
@@ -293,7 +280,7 @@ void SoloPlayerUI::generateCurrentAttempt() {
         std::string cellId = "ID_SINGLE_PLAYER_CURRENT_ATTEMPT_" + i;
         wxTextCtrl* currentAttemptCell = new wxTextCtrl(this, wxNewId(), "", wxDefaultPosition, wxSize(45, 35), wxTE_CENTER, wxDefaultValidator, cellId);
         currentAttemptCell->SetFont(currentAttemptInputFont);
-        //currentAttemptCell->Bind(wxEVT_TEXT, &SoloPlayerUI::OnTextChange, this);
+
          currentAttemptCell->Bind(wxEVT_TEXT, [this, currentAttemptCell](wxCommandEvent& event) {
             wxString value = currentAttemptCell->GetValue();
 
@@ -353,21 +340,6 @@ void SoloPlayerUI::OnAcceptAttemptClick(wxCommandEvent& evt) {
                        + std::to_string(this->game->getPlayer1()->getAttempts().size()) + " prób. Czas wyzwania wynosi: "
                        + wxString::Format("%.1f s", elapsedTime)), _("Sukces"), wxOK | wxICON_INFORMATION);
     }
-}
-
-void SoloPlayerUI::OnTextChange(wxCommandEvent& evt){
-        wxString value = evt.GetString();
-
-        // Allow only one digit (0-9)
-        if (value.length() > 1 || !value.IsEmpty() && !wxIsdigit(value[0])) {
-            //singleDigitCtrl->SetValue(value.substr(0, 1));
-            //singleDigitCtrl->SetInsertionPointEnd(); // Maintain cursor position
-        }
-
-        //event.Skip();
-
-        // Print or use the new value
-        //wxLogMessage("Text changed: %s", newValue);
 }
 
 void SoloPlayerUI::OnCloseGame(wxCloseEvent& event) {

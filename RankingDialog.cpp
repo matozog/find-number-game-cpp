@@ -22,10 +22,8 @@ BEGIN_EVENT_TABLE(RankingDialog,wxDialog)
 	//*)
 END_EVENT_TABLE()
 
-
 RankingDialog::RankingDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size, const std::vector<PlayerStats>& stats): playersStats(stats)
 {
-    //this->playersStats = stats;
     int totalHeight = 35 + this->playersStats.size() * 25;
     if(this->playersStats.size() > 8) {
         totalHeight = 35  + 25 * 8;
@@ -78,7 +76,6 @@ RankingDialog::RankingDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
     statsGrid->SetColLabelSize(35);
 
     FlexGridSizer1->Add(statsGrid, 1, wxALL|wxEXPAND, 15);
-    //scrolledWindow->SetSizer(FlexGridSizer1);
 
 	SetSizer(FlexGridSizer1);
 	FlexGridSizer1->Fit(this);

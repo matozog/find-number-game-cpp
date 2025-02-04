@@ -5,13 +5,6 @@
 #include <vector>
 #include <fstream>
 
-/*Game::Game(Level* level, Player* player1, const std::vector<PlayerStats>& playerStats){
-    this->level = level;
-    this->type = type;
-    this->player1 = player1;
-    this->playersStats = playerStats;
-}*/
-
 Level* Game::getLevel() {
     return this->level;
 }
@@ -45,7 +38,6 @@ void Game::setSolution(const std::vector<std::string>& solution) {
 std::vector<std::string> Game::getSolution() const {
     return solution;
 }
-
 
 void Game::savePlayerStats(){
     bool rewriteRanking = false;

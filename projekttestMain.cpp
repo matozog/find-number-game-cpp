@@ -78,10 +78,8 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
     wxFont labelFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 
     //(*Initialize(projekttestDialog)
-    //wxBoxSizer* BoxSizer1;
     wxFlexGridSizer* FlexGridSizer1;
     wxGridSizer* GridSizer1;
-    //wxBoxSizer* GridSizer2;
 
     Create(parent, id, _("Znajdź liczbę"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
 
@@ -114,7 +112,6 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
 
     wxGridSizer* GameSettingsSizer = new wxGridSizer(2, 2, 5, 10);
 
-    //wxBoxSizer* LevelBox = new wxBoxSizer(wxHORIZONTAL);
     StaticText5 = new wxStaticText(this, ID_STATICTEXT5, _("Poziom trudności"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
     GameSettingsSizer->Add(StaticText5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     LevelChoice = new wxChoice(this, ID_LEVEL_CHOICE, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_LEVEL_CHOICE"));
@@ -122,9 +119,7 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
     LevelChoice->SetSelection( LevelChoice->Append(_("Średni")) );
     LevelChoice->Append(_("Trudny"));
     GameSettingsSizer->Add(LevelChoice, 0, wxALL|wxEXPAND, 5);
-    //FlexGridSizer1->Add(GameSettingsSizer, 0, wxALL|wxEXPAND, 10);
 
-    //GridSizer2 = new wxBoxSizer(wxHORIZONTAL);
     StaticText6 = new wxStaticText(this, ID_STATICTEXT6, _("Nick gracza"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
     GameSettingsSizer->Add(StaticText6, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5);
 
@@ -176,10 +171,10 @@ projekttestDialog::projekttestDialog(wxWindow* parent,wxWindowID id)
 
 void projekttestDialog::OnInfoClick(wxCommandEvent& event){
     // Specify the path to the PDF file
-    wxString pdfPath = wxT("./assets/game-info.pdf");
+    wxString pdfPath = wxT(".\\assets\\game-info.pdf");
 
     // Launch the default application for opening PDFs
-    if (!wxLaunchDefaultApplication("/game-info.pdf"))
+    if (!wxLaunchDefaultApplication(pdfPath))
     {
         wxMessageBox(_("Nie można otworzyć pliku instrukcji gry."), _("Bląd wczytywania"), wxOK | wxICON_ERROR);
     }
@@ -196,7 +191,6 @@ void projekttestDialog::OnPlayButtonClick(wxCommandEvent& event)
 void projekttestDialog::createGame() {
     Level* level = new Level(LevelChoice->GetStringSelection().ToUTF8().data());
 
-    //std::string gameType = SinglePlayerCheckbox->IsChecked() ? "single" : "multi";
     Player* player1 = new Player(Player1TextField->GetValue().ToStdString());
     this->game = new Game(level, player1, this->playersStats);
 
@@ -235,7 +229,6 @@ void projekttestDialog::loadPlayersRanking() {
 }
 
 void projekttestDialog::OnShowRanking(wxCommandEvent& event){
-    //this->rankingDialog->SetPlayersStats(this->game->getPlayerStats());
     this->rankingDialog->recalculateGridData();
     this->rankingDialog->ShowModal();
 }
