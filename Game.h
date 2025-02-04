@@ -15,7 +15,7 @@ private:
     Player* player2;
     std::vector<PlayerStats>& playersStats;
 
-    bool areNewPlayerStatsBetter(auto& currentStats);
+    bool areNewPlayerStatsBetter(std::vector<PlayerStats>::iterator& currentStats);
     void savePlayersStatsToCSVFile();
 
 public:
@@ -29,6 +29,8 @@ public:
     bool checkGuess(const std::vector<std::string>& guess);
     void savePlayerStats();
     std::vector<PlayerStats> getPlayerStats() { return this->playersStats; }
+
+    ~Game();
 };
 
 #endif // GAME_H_INCLUDED

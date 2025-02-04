@@ -69,13 +69,8 @@
 		<Unit filename="Game.h" />
 		<Unit filename="Level.cpp" />
 		<Unit filename="Level.h" />
-		<Unit filename="MultiPlayerUI.cpp" />
-		<Unit filename="MultiPlayerUI.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
-		<Unit filename="PlayerStats.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="PlayerStats.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
@@ -90,7 +85,6 @@
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
-		<Unit filename="wxsmith/MultiPlayerUI.wxs" />
 		<Unit filename="wxsmith/RankingDialog.wxs" />
 		<Unit filename="wxsmith/SoloPlayerUI.wxs" />
 		<Unit filename="wxsmith/projekttestdialog.wxs" />

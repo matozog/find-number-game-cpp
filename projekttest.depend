@@ -2069,7 +2069,7 @@
 1736177434 c:\users\ozogm\documents\cpp\wxwidgets-3.2.6-mono64\include\wx\qt\tglbtn.h
 	"wx/tglbtn.h"
 
-1738707764 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
+1738708601 source:c:\users\ozogm\documents\cpp\projects\projekttest\projekttestmain.cpp
 	"projekttestMain.h"
 	<wx/msgdlg.h>
 	<wx/wx.h>
@@ -2128,7 +2128,7 @@
 	<wx/string.h>
 	<wx/statline.h>
 
-1738705787 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
+1738708647 c:\users\ozogm\documents\cpp\projects\projekttest\soloplayerui.h
 	"Game.h"
 	<wx/dialog.h>
 	<wx/sizer.h>
@@ -2137,7 +2137,7 @@
 	<wx/timer.h>
 	<wx/dcclient.h>
 
-1738706072 c:\users\ozogm\documents\cpp\projects\projekttest\game.h
+1738709124 c:\users\ozogm\documents\cpp\projects\projekttest\game.h
 	"Level.h"
 	"Player.h"
 	"PlayerStats.h"
@@ -2167,7 +2167,7 @@
 1738446665 source:c:\users\ozogm\documents\cpp\projects\projekttest\level.cpp
 	"Level.h"
 
-1738707630 source:c:\users\ozogm\documents\cpp\projects\projekttest\game.cpp
+1738709097 source:c:\users\ozogm\documents\cpp\projects\projekttest\game.cpp
 	"Game.h"
 	<algorithm>
 	<wx/msgdlg.h>
@@ -2789,7 +2789,7 @@
 1737571238 c:\users\ozogm\documents\cpp\projects\projekttest\rankingwindow.h
 	<wx/wx.h>
 
-1738707190 c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.h
+1738708176 c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.h
 	<vector>
 	"PlayerStats.h"
 	<wx/choice.h>
@@ -2798,7 +2798,7 @@
 	<wx/sizer.h>
 	<wx/stattext.h>
 
-1738707401 source:c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.cpp
+1738707943 source:c:\users\ozogm\documents\cpp\projects\projekttest\rankingdialog.cpp
 	"RankingDialog.h"
 	<wx/intl.h>
 	<wx/string.h>

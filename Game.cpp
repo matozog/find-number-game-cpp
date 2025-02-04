@@ -41,7 +41,7 @@ std::vector<std::string> Game::getSolution() const {
 
 void Game::savePlayerStats(){
     bool rewriteRanking = false;
-    auto currentStats = std::find_if(playersStats.begin(), playersStats.end(), [this](const PlayerStats& p) {
+    std::vector<PlayerStats>::iterator currentStats = std::find_if(playersStats.begin(), playersStats.end(), [this](const PlayerStats& p) {
         return p.getNick() == player1->getNickname() && p.getLevel() == level->getLevelTypeText();
     });
 
@@ -62,7 +62,7 @@ void Game::savePlayerStats(){
     }
 }
 
-bool Game::areNewPlayerStatsBetter(auto& currentStats) {
+bool Game::areNewPlayerStatsBetter(std::vector<PlayerStats>::iterator& currentStats) {
     if(this->player1->getAttempts().size() < currentStats->getAttempts()){
         return true;
     } else if (this->player1->getAttempts().size() == currentStats->getAttempts()) {
@@ -82,7 +82,7 @@ void Game::savePlayersStatsToCSVFile(){
     }
 
     // Write player stats
-    for (const auto& player : playersStats) {
+    for (const PlayerStats& player : playersStats) {
         file << player.getNick() << ","
              << player.getLevel() << ","
              << player.getAttempts() << ","
@@ -90,4 +90,10 @@ void Game::savePlayersStatsToCSVFile(){
     }
 
     file.close();  // Close file
+}
+
+Game::~Game() {
+    delete level;
+    delete player1;
+    delete player2;
 }

@@ -50,6 +50,7 @@ class RankingDialog: public wxDialog
         wxFlexGridSizer* FlexGridSizer1;
         const std::vector<PlayerStats> &playersStats;
         std::vector<PlayerStats> filteredStats;
+
 		//(*Handlers(RankingDialog)
 		//*)
 

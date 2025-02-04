@@ -236,6 +236,25 @@ void projekttestDialog::OnShowRanking(wxCommandEvent& event){
 
 projekttestDialog::~projekttestDialog()
 {
+    if (multiPlayerDialog) {
+        delete multiPlayerDialog;
+        multiPlayerDialog = nullptr;
+    }
+
+    if (singlePlayerDialog) {
+        delete singlePlayerDialog;
+        singlePlayerDialog = nullptr;
+    }
+
+    if (rankingDialog) {
+        delete rankingDialog;
+        rankingDialog = nullptr;
+    }
+
+    if (game) {
+        delete game;
+        game = nullptr;
+    }
     //(*Destroy(projekttestDialog)
     //*)
 }
