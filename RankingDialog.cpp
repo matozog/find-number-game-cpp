@@ -95,6 +95,11 @@ RankingDialog::RankingDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 
 }
 
+void RankingDialog::updateFilteredList(){
+    this->filteredStats.clear();
+    this->filteredStats = this->playersStats;
+}
+
 void RankingDialog::recalculateGridData() {
     if(_(OptionsChoice->GetStringSelection().ToUTF8().data()) == "Czas"){
         this->SortStatsByTIme();
@@ -110,7 +115,7 @@ void RankingDialog::recalculateGridData() {
 
     // Populate grid with player data
     for (size_t i = 0; i < this->filteredStats.size(); ++i) {
-        statsGrid->SetCellValue(i, 0, this->filteredStats[i].getNick());
+        statsGrid->SetCellValue(i, 0, _(this->filteredStats[i].getNick()));
         statsGrid->SetCellValue(i, 1, _(this->filteredStats[i].getLevel()));
         statsGrid->SetCellValue(i, 2, wxString::Format("%d", this->filteredStats[i].getAttempts()));
         statsGrid->SetCellValue(i, 3, wxString::Format("%.2f", this->filteredStats[i].getTime()));

@@ -59,7 +59,6 @@ void Game::savePlayerStats(){
 
     if(rewriteRanking){
         savePlayersStatsToCSVFile();
-        wxMessageBox("Rewrite ranking", _("Bląd wczytywania"), wxOK | wxICON_ERROR);
     }
 }
 

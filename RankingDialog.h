@@ -23,6 +23,7 @@ class RankingDialog: public wxDialog
 		void SortStatsByAttempts();
 		void SortStatsByTIme();
         void recalculateGridData();
+        void updateFilteredList();
         //void SetPlayersStats(std::vector<PlayerStats>& stats) { this->playersStats = &stats; };
 		virtual ~RankingDialog();
 

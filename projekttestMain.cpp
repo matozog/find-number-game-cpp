@@ -201,7 +201,7 @@ void projekttestDialog::createGame() {
 void projekttestDialog::loadPlayersRanking() {
     std::ifstream file("ranking.csv"); // Open the file
     if (!file.is_open()) {
-        std::cerr << "Error: Could not open file " << "ranking.csv" << "\n";
+        wxMessageBox(_("Nie można znaleźć pliku ranking.csv"), _("Bląd wczytywania pliku"), wxOK | wxICON_ERROR);
         return;
     }
 
@@ -229,6 +229,7 @@ void projekttestDialog::loadPlayersRanking() {
 }
 
 void projekttestDialog::OnShowRanking(wxCommandEvent& event){
+    this->rankingDialog->FilterGridDataByLevel();
     this->rankingDialog->recalculateGridData();
     this->rankingDialog->ShowModal();
 }
