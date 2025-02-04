@@ -152,9 +152,6 @@ SoloPlayerUI::SoloPlayerUI(wxWindow* parent,wxWindowID id, const wxPoint& pos,co
 
     // Timer
     Timer1.Start(100);
-
-    // Bind the paint event to draw the gradient
-    //this->Bind(wxEVT_PAINT, &SoloPlayerUI::OnPaint, this);
 }
 
 void SoloPlayerUI::OnMouseEnterAcceptButton(wxMouseEvent& event){
@@ -164,18 +161,6 @@ void SoloPlayerUI::OnMouseEnterAcceptButton(wxMouseEvent& event){
         button->Refresh();
     }
     event.Skip();
-}
-
-std::string joinStrings(const std::vector<std::string>& strings, const std::string& delimiter) {
-    std::string result;
-    for (size_t i = 0; i < strings.size(); ++i) {
-        result += "?";
-        //result += strings[i];
-        /*if (i < strings.size() - 1) {
-            result += delimiter; // Add the delimiter except after the last element
-        }*/
-    }
-    return result;
 }
 
 void SoloPlayerUI::createGameBoard(Game* game){
@@ -188,7 +173,7 @@ void SoloPlayerUI::createGameBoard(Game* game){
     }
     this->game = game;
     PlayerAttemptsGridBox->SetCols(2);
-    scrolledWindow->SetMaxSize(wxSize(gameBoardWidth, 600)); // -1 for width means no limit, 200px max height
+    scrolledWindow->SetMaxSize(wxSize(gameBoardWidth, 600)); // -1 for width means no limit, 600px max height
     scrolledWindow->SetMinSize(wxSize(gameBoardWidth, 0));
     PlayerNicknameTextField->SetValue(game->getPlayer1()->getNickname());
     TextCtrl2->SetValue(_(game->getLevel()->getLevelTypeText()));
